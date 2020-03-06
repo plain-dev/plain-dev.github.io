@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+    <link rel="dns-prefetch" href="//hm.baidu.com">
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>【安卓基础】构建一个通用的对话框（Dialog） | Plain Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="192x192" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="32x32" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="16x16" href="/img/icon.png"><link rel="mask-icon" href="/img/icon.png" color="#F0F2F0"><meta name="theme-color" content="#F0F2F0">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #F0F2F0;
+    }
+
+    a, a:visited {
+        color: #0F4C81;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0F4C81;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #0F4C81;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #F46F60;
+    }
+
+    .avatar {
+        background: #F46F60;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #F46F60;
+    }
+
+    .navbar-link:hover {
+        color: #F46F60;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #F46F60;
+        border-color: #F46F60;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #F46F60;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #F0F2F0;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Plain Blog"><meta name="msapplication-starturl" content="https://plain-dev.com"><meta name="msapplication-navbutton-color" content="#F0F2F0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plain Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="【安卓基础】构建一个通用的对话框（Dialog） | Plain Blog"><meta property="og:site_name" content="Plain Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://plain-dev.com/general-dialog/"><meta property="og:locale" content="zh-CN"><meta name="description" content="对话框Dialog在开发中用到的挺多的，Android也为我们提供了AlertDialog帮助我们快速构建一个对话框，用以来也挺方便的。但大多数情况，我们的UI界面还得按照美工的设计来走，此时就不得不自定义对话框了，下面我将分享一下一种通用的构造对话框的方法，基本上大多数的对话框需求都能完成✅ - Plain - Plain Blog"><meta name="keywords" content="Android, Dialog, 数码,科技,动漫,游戏,开发者"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/upic_library/fr4AqF.jpg"><meta property="article:published_time" content="2020-03-06T03:56:47.310Z"><meta property="article:modified_time" content="2020-03-06T03:56:47.312Z"><meta property="og:updated_time" content="2020-03-06T03:56:47.312Z"><meta property="article:author" content="Plain"><meta property="article:tag" content="Android, Dialog, 数码,科技,动漫,游戏,开发者"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://gitee.com/plain-dev/oss/raw/master/upic_library/fr4AqF.jpg">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://plain-dev.com/general-dialog/">
+
+    <meta name="generator" content="Hexo 4.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-152396978-1', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?a576f1cb9fdd2eb09be64aecb926dda9';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://plain-dev.com/general-dialog/",
+    "@type": "BlogPosting",
+    "logo": "https://plain-dev.com/img/icon.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://plain-dev.com/general-dialog/"
+    },
+    "headline": "【安卓基础】构建一个通用的对话框（Dialog） | Plain Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://gitee.com/plain-dev/oss/raw/master/upic_library/fr4AqF.jpg"
+    },
+    
+    "datePublished": "2020-03-06T03:56:47.310Z",
+    "dateModified": "2020-03-06T03:56:47.312Z",
+    "author": {
+        "@type": "Person",
+        "name": "Plain",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://gitee.com/plain-dev/oss/raw/master/v2/bMjmKN.png"
+        },
+        "description": "休想打败我的生活🔥"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Plain Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://plain-dev.com/img/icon.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://plain-dev.com/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Android, Dialog, 数码,科技,动漫,游戏,开发者",
+    "description": "对话框Dialog在开发中用到的挺多的，Android也为我们提供了AlertDialog帮助我们快速构建一个对话框，用以来也挺方便的。但大多数情况，我们的UI界面还得按照美工的设计来走，此时就不得不自定义对话框了，下面我将分享一下一种通用的构造对话框的方法，基本上大多数的对话框需求都能完成✅ - Plain - Plain Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Plain Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                休想打败我的生活🔥
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/tags/" class="navbar-link">标签</a>
+    
+        <a href="/about/" class="navbar-link">关于</a>
+    
+        <a href="/links/" class="navbar-link">友链</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=Plain Blog&url=https://plain-dev.com&pic=https://gitee.com/plain-dev/oss/raw/master/upic_library/fr4AqF.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Plain Blog&url=https://plain-dev.com&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain Blog&title=【安卓基础】构建一个通用的对话框（Dialog）&summary=极简主义&pics=https://gitee.com/plain-dev/oss/raw/master/upic_library/fr4AqF.jpg&url=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://plain-dev.com&text=【安卓基础】构建一个通用的对话框（Dialog）" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('https://gitee.com/plain-dev/oss/raw/master/upic_library/fr4AqF.jpg')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">【安卓基础】构建一个通用的对话框（Dialog）</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="https://gitee.com/plain-dev/oss/raw/master/v2/bMjmKN.png" src="/img/suka-lazyload.gif" alt="Plain's Avatar">
+        <span>2020-03-06</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/%E5%AE%89%E5%8D%93%E7%AC%94%E8%AE%B0/">安卓笔记</a>
+        
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=【安卓基础】构建一个通用的对话框（Dialog）&url=https://plain-dev.com/general-dialog/&pic=https://gitee.com/plain-dev/oss/raw/master/upic_library/fr4AqF.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=【安卓基础】构建一个通用的对话框（Dialog）&url=https://plain-dev.com/general-dialog/&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://plain-dev.com/general-dialog/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain Blog&title=Plain Blog&summary=极简主义&pics=https://gitee.com/plain-dev/oss/raw/master/upic_library/fr4AqF.jpg&url=https://plain-dev.com/general-dialog/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://plain-dev.com/general-dialog/&text=Plain Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">流程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <blockquote>
+<p>对话框Dialog在开发中用到的挺多的，Android也为我们提供了AlertDialog帮助我们快速构建一个对话框，用以来也挺方便的。但大多数情况，我们的UI界面还得按照美工的设计来走，此时就不得不自定义对话框了，下面我将分享一下一种通用的构造对话框的方法，基本上大多数的对话框需求都能完成✅</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>在平时的需求中，对话框的样子是最频繁变化的，所以我们可以将对话框的UI单拿出来，在外部设置布局。再就是对话框的作用，一般就是只展示文字或者有几个按钮再或者有个输入框与用户进行交互，所以我们可以把这些操作，整理成不同的方法，进行调用。再就是对话框的大小，这个我们可以在构建对话框的时候手动设置，来进行不同分辨率的适配。</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ul>
+<li>统一对话框的样式</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"UserDialogStyle"</span> <span class="attr">parent</span>=<span class="string">"android:style/Theme.Dialog"</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:background"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span> //背景透明</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span> //窗口背景透明</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span> //无标题</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自定义对话框（采用构建者模式）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDialog</span> <span class="keyword">extends</span> <span class="title">Dialog</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> cancelTouchOut;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> cancelable;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> dimEnabled;</span><br><span class="line">    <span class="keyword">private</span> View view;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> height, width;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> time;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">UserDialog</span><span class="params">(@NonNull Builder builder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(builder, -<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">UserDialog</span><span class="params">(@NonNull Builder builder, <span class="keyword">int</span> resStyle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(builder.context, resStyle);</span><br><span class="line">        cancelTouchOut = builder.cancelTouchOut;</span><br><span class="line">        cancelable = builder.cancelable;</span><br><span class="line">        dimEnabled = builder.dimEnabled;</span><br><span class="line">        view = builder.view;</span><br><span class="line">        height = builder.height;</span><br><span class="line">        width = builder.width;</span><br><span class="line">        time = builder.time;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(view);</span><br><span class="line">        setCanceledOnTouchOutside(cancelTouchOut);</span><br><span class="line">        setCancelable(cancelable);</span><br><span class="line">        <span class="comment">//调整窗口大小</span></span><br><span class="line">        Window win = getWindow();</span><br><span class="line">        WindowManager.LayoutParams lp = win != <span class="keyword">null</span> ? win.getAttributes() : <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (lp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            lp.gravity = Gravity.CENTER;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (lp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            lp.height = height;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (lp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            lp.width = width;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (win != <span class="keyword">null</span>) &#123;</span><br><span class="line">            win.setAttributes(lp);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (lp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!dimEnabled) &#123;</span><br><span class="line">                lp.dimAmount = <span class="number">0f</span>; <span class="comment">//背景是否变暗</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (time &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(time);</span><br><span class="line">                    dismiss();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> &lt;T extends View&gt; <span class="function">T <span class="title">findUserDialogViewById</span><span class="params">(@IdRes <span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> view.findViewById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 外部设置View的隐藏显示</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> viewRes View Id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> type    Visibility</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBtnVisibility</span><span class="params">(@IdRes <span class="keyword">int</span> viewRes, <span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">        Button button = view.findViewById(viewRes);</span><br><span class="line">        button.setVisibility(type);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 外部设置输入框自动弹出键盘(500ms后)</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id EditText Id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEditTextShowInput</span><span class="params">(@IdRes <span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        EditText editText = view.findViewById(id);</span><br><span class="line">        editText.setText(<span class="string">""</span>);</span><br><span class="line">        editText.postDelayed(() -&gt; &#123;</span><br><span class="line">            editText.requestFocus();</span><br><span class="line">            Utils.showDialogSoftInput(editText);</span><br><span class="line">        &#125;, <span class="number">500</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> Context context;</span><br><span class="line">        <span class="keyword">private</span> View view;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">boolean</span> cancelTouchOut;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">boolean</span> cancelable;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">boolean</span> dimEnabled;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> resStyle = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> height, width;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">long</span> time = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 构建者初始化</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> context 上下文</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> resStyle Dialog Style</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Builder</span><span class="params">(Context context, <span class="keyword">int</span> resStyle)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.context = context;</span><br><span class="line">            <span class="keyword">this</span>.resStyle = resStyle;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Dialog所需View</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> resView 布局</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">view</span><span class="params">(@LayoutRes <span class="keyword">int</span> resView)</span> </span>&#123;</span><br><span class="line">            view = LayoutInflater.from(context).inflate(resView, <span class="keyword">null</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 是否允许点击Dialog外关闭</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> val true 允许 false 不允许</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">cancelTouchOut</span><span class="params">(<span class="keyword">boolean</span> val)</span> </span>&#123;</span><br><span class="line">            cancelTouchOut = val;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 是否允许点击返回键关闭</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> val true 允许 false 不允许</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">cancelable</span><span class="params">(<span class="keyword">boolean</span> val)</span> </span>&#123;</span><br><span class="line">            cancelable = val;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 是否允许背景变暗</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> val true 允许 false 不允许</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">setDimEnabled</span><span class="params">(<span class="keyword">boolean</span> val)</span> </span>&#123;</span><br><span class="line">            dimEnabled = val;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 为Button设置Text</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> viewRes Button Id</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> text 文本</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">addBtnText</span><span class="params">(@IdRes <span class="keyword">int</span> viewRes, String text)</span> </span>&#123;</span><br><span class="line">            Button button = view.findViewById(viewRes);</span><br><span class="line">            button.setText(text);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 为TextView设置Text</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> viewRes TextView Id</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> text 文本</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">addText</span><span class="params">(@IdRes <span class="keyword">int</span> viewRes, String text)</span> </span>&#123;</span><br><span class="line">            TextView textView = view.findViewById(viewRes);</span><br><span class="line">            textView.setText(text);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 为某个View设置点击事件监听</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> viewRes View Id</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> listener 点击事件</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">addViewOnclick</span><span class="params">(<span class="keyword">int</span> viewRes, View.OnClickListener listener)</span> </span>&#123;</span><br><span class="line">            view.findViewById(viewRes).setOnClickListener(listener);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 指定Dialog的宽度（P：与布局的宽度设置一致，效果最佳）</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> dimenRes Width Dimen</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">widthDimenRes</span><span class="params">(<span class="keyword">int</span> dimenRes)</span> </span>&#123;</span><br><span class="line">            width = context.getResources().getDimensionPixelOffset(dimenRes);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 指定Dialog的高度（P：与布局的高度设置一致，效果最佳）</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> dimenRes Height Dimen</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">heightDimenRes</span><span class="params">(<span class="keyword">int</span> dimenRes)</span> </span>&#123;</span><br><span class="line">            height = context.getResources().getDimensionPixelOffset(dimenRes);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 设置自动关闭Dialog(指定时间)</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> t ms后消失</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">setTimeOut</span><span class="params">(<span class="keyword">long</span> t)</span> </span>&#123;</span><br><span class="line">            time = t;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 初始化时设置某个控件的隐藏</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> viewRes View Id</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> type Visibility</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> Builder</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Builder <span class="title">setViewVisibility</span><span class="params">(<span class="keyword">int</span> viewRes, <span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">            View View = view.findViewById(viewRes);</span><br><span class="line">            View.setVisibility(type);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 构建结束，实例化UserDialog</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@return</span> UserDialog</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> UserDialog <span class="title">build</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (resStyle != -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> UserDialog(<span class="keyword">this</span>, resStyle);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> UserDialog(<span class="keyword">this</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在<code>Builder</code>中列举了我常用的几种对View的操作，大家可以根据自己的需求添加</strong></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">UserDialog dialog = <span class="keyword">new</span> UserDialog.Builder(mContext, R.style.UserDialogStyle)</span><br><span class="line">        .view(R.layout.layout_hint_dialog)</span><br><span class="line">        .cancelTouchOut(<span class="keyword">false</span>)</span><br><span class="line">        .cancelable(<span class="keyword">false</span>)</span><br><span class="line">        .setDimEnabled(<span class="keyword">true</span>)</span><br><span class="line">        .addText(R.id.tv_content, <span class="string">""</span>)</span><br><span class="line">        .addViewOnclick(R.id.btn_sure, v -&gt; &#123;</span><br><span class="line">                <span class="comment">//具体操作</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        .widthDimenRes(R.dimen.size300)</span><br><span class="line">        .heightDimenRes(R.dimen.size180)</span><br><span class="line">        .build();</span><br><span class="line">dialog.show();</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过上面的操作，我们完成了一个通用的对话框构建器，只需指定需要的布局文件，然后根据需求设置不同的属性，就可以了。</p>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-03-06");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-03-06T03:56:47.310Z" itemprop="datePublished">2020-03-06</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/%E5%AE%89%E5%8D%93%E7%AC%94%E8%AE%B0/'>安卓笔记</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Android/" rel="tag">#&nbsp;Android</a>
+
+<a class="post-tags-list-item" href="/tags/Dialog/" rel="tag">#&nbsp;Dialog</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/git-command-wiki/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Git常用命令</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/flutter-widget-text/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Flutter WidgetText介绍及其使用</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "WfyboDNB3X0Wrr5Tm2Jvd2Ii-MdYXbMMI",
+        appKey: "6FBsLgRXWbuDJ2AdCOMN7P1q",
+        placeholder: "请在发表评论时留下您的电子邮件地址，以便您收到消息提醒...",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'mp',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: false
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://plain-dev.com">Plain Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2016;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+    <link rel="dns-prefetch" href="//hm.baidu.com">
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Java的运算符 | Plain Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="192x192" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="32x32" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="16x16" href="/img/icon.png"><link rel="mask-icon" href="/img/icon.png" color="#F0F2F0"><meta name="theme-color" content="#F0F2F0">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #F0F2F0;
+    }
+
+    a, a:visited {
+        color: #0F4C81;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0F4C81;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #0F4C81;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #F46F60;
+    }
+
+    .avatar {
+        background: #F46F60;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #F46F60;
+    }
+
+    .navbar-link:hover {
+        color: #F46F60;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #F46F60;
+        border-color: #F46F60;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #F46F60;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #F0F2F0;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Plain Blog"><meta name="msapplication-starturl" content="https://plain-dev.com"><meta name="msapplication-navbutton-color" content="#F0F2F0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plain Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Java的运算符 | Plain Blog"><meta property="og:site_name" content="Plain Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://plain-dev.com/java-operator/"><meta property="og:locale" content="zh-CN"><meta name="description" content="分类 算术运算符  关系运算符  位运算符  逻辑运算符  赋值运算符  其他运算符 - Plain - Plain Blog"><meta name="keywords" content="Java, 数码,科技,动漫,游戏,开发者"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/upic_library/3Zk9pe.jpg"><meta property="article:published_time" content="2020-03-06T03:56:47.817Z"><meta property="article:modified_time" content="2020-03-06T03:56:47.826Z"><meta property="og:updated_time" content="2020-03-06T03:56:47.826Z"><meta property="article:author" content="Plain"><meta property="article:tag" content="Java, 数码,科技,动漫,游戏,开发者"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://gitee.com/plain-dev/oss/raw/master/upic_library/3Zk9pe.jpg">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://plain-dev.com/java-operator/">
+
+    <meta name="generator" content="Hexo 4.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-152396978-1', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?a576f1cb9fdd2eb09be64aecb926dda9';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://plain-dev.com/java-operator/",
+    "@type": "BlogPosting",
+    "logo": "https://plain-dev.com/img/icon.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://plain-dev.com/java-operator/"
+    },
+    "headline": "Java的运算符 | Plain Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://gitee.com/plain-dev/oss/raw/master/upic_library/3Zk9pe.jpg"
+    },
+    
+    "datePublished": "2020-03-06T03:56:47.817Z",
+    "dateModified": "2020-03-06T03:56:47.826Z",
+    "author": {
+        "@type": "Person",
+        "name": "Plain",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://gitee.com/plain-dev/oss/raw/master/v2/bMjmKN.png"
+        },
+        "description": "休想打败我的生活🔥"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Plain Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://plain-dev.com/img/icon.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://plain-dev.com/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Java, 数码,科技,动漫,游戏,开发者",
+    "description": "分类 算术运算符  关系运算符  位运算符  逻辑运算符  赋值运算符  其他运算符 - Plain - Plain Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Plain Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                休想打败我的生活🔥
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/tags/" class="navbar-link">标签</a>
+    
+        <a href="/about/" class="navbar-link">关于</a>
+    
+        <a href="/links/" class="navbar-link">友链</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=Plain Blog&url=https://plain-dev.com&pic=https://gitee.com/plain-dev/oss/raw/master/upic_library/3Zk9pe.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Plain Blog&url=https://plain-dev.com&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain Blog&title=Java的运算符&summary=极简主义&pics=https://gitee.com/plain-dev/oss/raw/master/upic_library/3Zk9pe.jpg&url=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://plain-dev.com&text=Java的运算符" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('https://gitee.com/plain-dev/oss/raw/master/upic_library/3Zk9pe.jpg')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Java的运算符</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="https://gitee.com/plain-dev/oss/raw/master/v2/bMjmKN.png" src="/img/suka-lazyload.gif" alt="Plain's Avatar">
+        <span>2020-03-06</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/Java%E7%AC%94%E8%AE%B0/">Java笔记</a>
+        
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=Java的运算符&url=https://plain-dev.com/java-operator/&pic=https://gitee.com/plain-dev/oss/raw/master/upic_library/3Zk9pe.jpg&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=Java的运算符&url=https://plain-dev.com/java-operator/&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://plain-dev.com/java-operator/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain Blog&title=Plain Blog&summary=极简主义&pics=https://gitee.com/plain-dev/oss/raw/master/upic_library/3Zk9pe.jpg&url=https://plain-dev.com/java-operator/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://plain-dev.com/java-operator/&text=Plain Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分类"><span class="post-toc-number">1.</span> <span class="post-toc-text">分类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算术运算符"><span class="post-toc-number">2.</span> <span class="post-toc-text">算术运算符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#认识"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">认识</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分类-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">分类</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关系运算符"><span class="post-toc-number">3.</span> <span class="post-toc-text">关系运算符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分类-2"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">分类</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#位运算符"><span class="post-toc-number">4.</span> <span class="post-toc-text">位运算符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#认识-1"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">认识</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分类-3"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">分类</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#逻辑运算符"><span class="post-toc-number">5.</span> <span class="post-toc-text">逻辑运算符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#认识-2"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">认识</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分类-4"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">分类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#短路逻辑运算符"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">短路逻辑运算符</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#赋值运算符"><span class="post-toc-number">6.</span> <span class="post-toc-text">赋值运算符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分类-5"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">分类</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件运算符"><span class="post-toc-number">7.</span> <span class="post-toc-text">条件运算符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#认识-3"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">认识</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#写法"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">写法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#应用"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">应用</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#instanceof运算符"><span class="post-toc-number">8.</span> <span class="post-toc-text">instanceof运算符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#认识-4"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">认识</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#格式"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">格式</span></a></li></ol></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li><p>算术运算符</p>
+</li>
+<li><p>关系运算符</p>
+</li>
+<li><p>位运算符</p>
+</li>
+<li><p>逻辑运算符</p>
+</li>
+<li><p>赋值运算符</p>
+</li>
+<li><p>其他运算符</p>
+</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><h4 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h4><p>算术运算符运用在数学表达式中</p>
+<h4 id="分类-1"><a href="#分类-1" class="headerlink" title="分类"></a>分类</h4><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>加法 - 相加运算符两侧的值</td>
+<td>A + B 等于 30</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减法 - 左操作数减去右操作数</td>
+<td>A – B 等于 -10</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘法 - 相乘操作符两侧的值</td>
+<td>A * B等于200</td>
+</tr>
+<tr>
+<td>/</td>
+<td>除法 - 左操作数除以右操作数</td>
+<td>B / A等于2</td>
+</tr>
+<tr>
+<td>％</td>
+<td>取余 - 左操作数除以右操作数的余数</td>
+<td>B%A等于0</td>
+</tr>
+<tr>
+<td>++</td>
+<td>自增: 操作数的值增加1</td>
+<td>B++ 或 ++B 等于 21</td>
+</tr>
+<tr>
+<td>–</td>
+<td>自减: 操作数的值减少1</td>
+<td>B– 或 –B 等于 19</td>
+</tr>
+</tbody></table>
+<ul>
+<li>前缀自增自减法(++a,–a): 先进行自增或者自减运算，再进行表达式运算</li>
+<li>后缀自增自减法(a++,a–): 先进行表达式运算，再进行自增或者自减运算</li>
+</ul>
+<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><h4 id="分类-2"><a href="#分类-2" class="headerlink" title="分类"></a>分类</h4><p>设 A = 10，B = 20</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>==</td>
+<td>检查如果两个操作数的值是否相等，如果相等则条件为真</td>
+<td>(A == B)为假 (非真）</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>检查如果两个操作数的值是否相等，如果值不相等则条件为真</td>
+<td>(A != B) 为真</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>检查左操作数的值是否大于右操作数的值，如果是那么条件为真。</td>
+<td>(A&gt; B) 非真</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>检查左操作数的值是否小于右操作数的值，如果是那么条件为真。</td>
+<td>(A &lt;B) 为真</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>检查左操作数的值是否大于或等于右操作数的值，如果是那么条件为真</td>
+<td>(A &gt;= B) 为假</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>检查左操作数的值是否小于或等于右操作数的值，如果是那么条件为真</td>
+<td>(A &lt;= B) 为真</td>
+</tr>
+</tbody></table>
+<h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><h4 id="认识-1"><a href="#认识-1" class="headerlink" title="认识"></a>认识</h4><p>Java定义了位运算符，应用于整数类型(int)，长整型(long)，短整型(short)，字符型(char)，和字节型(byte)等类型。</p>
+<p>位运算符作用在所有的位上，并且按位运算。</p>
+<p>假设a = 60，b = 13;它们的二进制格式表示将如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A = <span class="number">0011</span> <span class="number">1100</span></span><br><span class="line">B = <span class="number">0000</span> <span class="number">1101</span></span><br></pre></td></tr></table></figure>
+<h4 id="分类-3"><a href="#分类-3" class="headerlink" title="分类"></a>分类</h4><p>下表的 I 为 |</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>＆ 或</td>
+<td>如果相对应位都是1，则结果为1，否则为0</td>
+<td>(A＆B)，得到12，即0000 1100</td>
+</tr>
+<tr>
+<td>I 与</td>
+<td>如果相对应位都是0，则结果为0，否则为1</td>
+<td>(A I B)得到61，即 0011 1101</td>
+</tr>
+<tr>
+<td>^ 异或</td>
+<td>如果相对应位值相同，则结果为0，否则为1</td>
+<td>(A ^ B)得到49，即 0011 0001</td>
+</tr>
+<tr>
+<td>〜</td>
+<td>按位取反运算符翻转操作数的每一位，即0变成1，1变成0</td>
+<td>（〜A）得到-61，即1100 0011</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>按位左移运算符。左操作数按位左移右操作数指定的位数</td>
+<td>A &lt;&lt; 2得到240，即 1111 0000</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>按位右移运算符。左操作数按位右移右操作数指定的位数</td>
+<td>A &gt;&gt; 2得到15即 1111</td>
+</tr>
+<tr>
+<td>&gt;&gt;&gt;</td>
+<td>按位右移补零操作符。左操作数的值按右操作数指定的位数右移，移动得到的空位以零填充</td>
+<td>A&gt;&gt;&gt;2得到15即0000 1111</td>
+</tr>
+</tbody></table>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><h4 id="认识-2"><a href="#认识-2" class="headerlink" title="认识"></a>认识</h4><p>下表列出了逻辑运算符的基本运算，假设布尔变量A为真，变量B为假</p>
+<h4 id="分类-4"><a href="#分类-4" class="headerlink" title="分类"></a>分类</h4><p>下表的 I 为 |</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;&amp;</td>
+<td>称为逻辑与运算符。当且仅当两个操作数都为真，条件才为真</td>
+<td>(A &amp;&amp; B)为假</td>
+</tr>
+<tr>
+<td>II</td>
+<td>称为逻辑或操作符。如果任何两个操作数任何一个为真，条件为真</td>
+<td>(A II B)为真</td>
+</tr>
+<tr>
+<td>!</td>
+<td>称为逻辑非运算符。用来反转操作数的逻辑状态。如果条件为true，则逻辑非运算符将得到false</td>
+<td>!(A &amp;&amp; B) 为真</td>
+</tr>
+</tbody></table>
+<h4 id="短路逻辑运算符"><a href="#短路逻辑运算符" class="headerlink" title="短路逻辑运算符"></a>短路逻辑运算符</h4><p>当使用与逻辑运算符时，在两个操作数都为true时，结果才为true，但是当得到第一个操作为false时，其结果就必定是false，这时候就不会再判断第二个操作了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LuoJi</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">5</span>;<span class="comment">//定义一个变量；</span></span><br><span class="line">        <span class="keyword">boolean</span> b = (a&lt;<span class="number">4</span>)&amp;&amp;(a++&lt;<span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">"使用短路逻辑运算符的结果为"</span>+b);</span><br><span class="line">        System.out.println(<span class="string">"a的结果为"</span>+a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果为</p>
+<blockquote>
+<p>使用短路逻辑运算符的结果为false<br>a的结果为5</p>
+</blockquote>
+<p>解析</p>
+<blockquote>
+<p>该程序使用到了短路逻辑运算符(&amp;&amp;)，首先判断 a&lt;4 的结果为 false，则 b 的结果必定是 false，所以不再执行第二个操作 a++&lt;10 的判断，所以 a 的值为 5。</p>
+</blockquote>
+<h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><h4 id="分类-5"><a href="#分类-5" class="headerlink" title="分类"></a>分类</h4><p>下表的 I 为 |</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>=</td>
+<td>简单的赋值运算符，将右操作数的值赋给左侧操作数</td>
+<td>C = A + B将把A + B得到的值赋给C</td>
+</tr>
+<tr>
+<td>+=</td>
+<td>加和赋值操作符，它把左操作数和右操作数相加赋值给左操作数</td>
+<td>C += A等价于C = C + A</td>
+</tr>
+<tr>
+<td>-=</td>
+<td>减和赋值操作符，它把左操作数和右操作数相减赋值给左操作数</td>
+<td>C -= A等价于C = C - A</td>
+</tr>
+<tr>
+<td>*=</td>
+<td>乘和赋值操作符，它把左操作数和右操作数相乘赋值给左操作数</td>
+<td>C *= A等价于C = C * A</td>
+</tr>
+<tr>
+<td>/=</td>
+<td>除和赋值操作符，它把左操作数和右操作数相除赋值给左操作数</td>
+<td>C /= A等价于C = C / A</td>
+</tr>
+<tr>
+<td>(%)=</td>
+<td>取模和赋值操作符，它把左操作数和右操作数取模后赋值给左操作数</td>
+<td>C％= A等价于C = C％A</td>
+</tr>
+<tr>
+<td>&lt;&lt;=</td>
+<td>左移位赋值运算符</td>
+<td>C &lt;&lt; = 2等价于C = C &lt;&lt; 2</td>
+</tr>
+<tr>
+<td>&gt;&gt;=</td>
+<td>右移位赋值运算符</td>
+<td>C &gt;&gt; = 2等价于C = C &gt;&gt; 2</td>
+</tr>
+<tr>
+<td>＆=</td>
+<td>按位与赋值运算符</td>
+<td>C＆= 2等价于C = C＆2</td>
+</tr>
+<tr>
+<td>^=</td>
+<td>按位异或赋值操作符</td>
+<td>C ^ = 2等价于C = C ^ 2</td>
+</tr>
+<tr>
+<td>I =</td>
+<td>按位或赋值操作符</td>
+<td>C I= 2 等价于C = C I 2</td>
+</tr>
+</tbody></table>
+<h3 id="条件运算符"><a href="#条件运算符" class="headerlink" title="条件运算符"></a>条件运算符</h3><h4 id="认识-3"><a href="#认识-3" class="headerlink" title="认识"></a>认识</h4><p>条件运算符也被称为三元运算符。该运算符有3个操作数，并且需要判断布尔表达式的值。该运算符的主要是决定哪个值应该赋值给变量</p>
+<h4 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable x = (expression) ? value <span class="keyword">if</span> <span class="keyword">true</span> : value <span class="keyword">if</span> <span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">Test</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a == b) ? <span class="keyword">true</span> : <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="instanceof运算符"><a href="#instanceof运算符" class="headerlink" title="instanceof运算符"></a>instanceof运算符</h3><h4 id="认识-4"><a href="#认识-4" class="headerlink" title="认识"></a>认识</h4><p>该运算符用于操作对象实例，检查该对象是否是一个特定类型（类类型或接口类型）</p>
+<h4 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(Object reference variable) <span class="keyword">instanceof</span> (<span class="class"><span class="keyword">class</span>/<span class="title">interface</span> <span class="title">type</span>)</span></span><br></pre></td></tr></table></figure>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-03-06");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-03-06T03:56:47.817Z" itemprop="datePublished">2020-03-06</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/Java%E7%AC%94%E8%AE%B0/'>Java笔记</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Java/" rel="tag">#&nbsp;Java</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/java-parameter-passing/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Java参数传递机制</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/java-member-methods-of-the-class/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Java类的成员方法</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "WfyboDNB3X0Wrr5Tm2Jvd2Ii-MdYXbMMI",
+        appKey: "6FBsLgRXWbuDJ2AdCOMN7P1q",
+        placeholder: "请在发表评论时留下您的电子邮件地址，以便您收到消息提醒...",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'mp',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: false
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://plain-dev.com">Plain Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2016;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

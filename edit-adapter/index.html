@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+    <link rel="dns-prefetch" href="//hm.baidu.com">
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>EditAdapter 让 RecyclerView 快速集成列表编辑模式 | Plain Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="192x192" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="32x32" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="16x16" href="/img/icon.png"><link rel="mask-icon" href="/img/icon.png" color="#F0F2F0"><meta name="theme-color" content="#F0F2F0">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #F0F2F0;
+    }
+
+    a, a:visited {
+        color: #0F4C81;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0F4C81;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #0F4C81;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #F46F60;
+    }
+
+    .avatar {
+        background: #F46F60;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #F46F60;
+    }
+
+    .navbar-link:hover {
+        color: #F46F60;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #F46F60;
+        border-color: #F46F60;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #F46F60;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #F0F2F0;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Plain Blog"><meta name="msapplication-starturl" content="https://plain-dev.com"><meta name="msapplication-navbutton-color" content="#F0F2F0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plain Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="EditAdapter 让 RecyclerView 快速集成列表编辑模式 | Plain Blog"><meta property="og:site_name" content="Plain Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://plain-dev.com/edit-adapter/"><meta property="og:locale" content="zh-CN"><meta name="description" content="最近项目有个需求，需要在收藏列表增加编辑模式，包括全选、删除、长按进入编辑模式等，于是对Adapter进行了一下封装，并开源出来，一起交流学习  演示 添加EditAdapter到你的项目 在项目的 build.gradle 中添加：  123456allprojects &amp;#123;    repositories &amp;#123;	    ...	    maven &amp;#123; url &amp;#39 - Plain - Plain Blog"><meta name="keywords" content="Android, 数码,科技,动漫,游戏,开发者"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/upic_library/MOvJES.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/upic_library/xv4cBZ.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/upic_library/XV6IHn.gif"><meta property="og:image" content="https://jitpack.io/v/plain-dev/EditAdapter.svg"><meta property="article:published_time" content="2020-03-06T03:56:47.160Z"><meta property="article:modified_time" content="2020-03-06T03:56:47.161Z"><meta property="og:updated_time" content="2020-03-06T03:56:47.161Z"><meta property="article:author" content="Plain"><meta property="article:tag" content="Android, 数码,科技,动漫,游戏,开发者"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://gitee.com/plain-dev/oss/raw/master/upic_library/MOvJES.png">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://plain-dev.com/edit-adapter/">
+
+    <meta name="generator" content="Hexo 4.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-152396978-1', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?a576f1cb9fdd2eb09be64aecb926dda9';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://plain-dev.com/edit-adapter/",
+    "@type": "BlogPosting",
+    "logo": "https://plain-dev.com/img/icon.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://plain-dev.com/edit-adapter/"
+    },
+    "headline": "EditAdapter 让 RecyclerView 快速集成列表编辑模式 | Plain Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://gitee.com/plain-dev/oss/raw/master/upic_library/MOvJES.png"
+    },
+    
+    "datePublished": "2020-03-06T03:56:47.160Z",
+    "dateModified": "2020-03-06T03:56:47.161Z",
+    "author": {
+        "@type": "Person",
+        "name": "Plain",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://gitee.com/plain-dev/oss/raw/master/v2/bMjmKN.png"
+        },
+        "description": "休想打败我的生活🔥"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Plain Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://plain-dev.com/img/icon.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://plain-dev.com/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Android, 数码,科技,动漫,游戏,开发者",
+    "description": "最近项目有个需求，需要在收藏列表增加编辑模式，包括全选、删除、长按进入编辑模式等，于是对Adapter进行了一下封装，并开源出来，一起交流学习  演示 添加EditAdapter到你的项目 在项目的 build.gradle 中添加：  123456allprojects &amp;amp;#123;    repositories &amp;amp;#123;	    ...	    maven &amp;amp;#123; url &amp;amp;#39 - Plain - Plain Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Plain Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                休想打败我的生活🔥
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/tags/" class="navbar-link">标签</a>
+    
+        <a href="/about/" class="navbar-link">关于</a>
+    
+        <a href="/links/" class="navbar-link">友链</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=Plain Blog&url=https://plain-dev.com&pic=https://gitee.com/plain-dev/oss/raw/master/upic_library/MOvJES.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Plain Blog&url=https://plain-dev.com&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain Blog&title=EditAdapter 让 RecyclerView 快速集成列表编辑模式&summary=极简主义&pics=https://gitee.com/plain-dev/oss/raw/master/upic_library/MOvJES.png&url=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://plain-dev.com&text=EditAdapter 让 RecyclerView 快速集成列表编辑模式" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('https://gitee.com/plain-dev/oss/raw/master/upic_library/MOvJES.png')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">EditAdapter 让 RecyclerView 快速集成列表编辑模式</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="https://gitee.com/plain-dev/oss/raw/master/v2/bMjmKN.png" src="/img/suka-lazyload.gif" alt="Plain's Avatar">
+        <span>2020-03-06</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a>
+        
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=EditAdapter 让 RecyclerView 快速集成列表编辑模式&url=https://plain-dev.com/edit-adapter/&pic=https://gitee.com/plain-dev/oss/raw/master/upic_library/MOvJES.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=EditAdapter 让 RecyclerView 快速集成列表编辑模式&url=https://plain-dev.com/edit-adapter/&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://plain-dev.com/edit-adapter/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain Blog&title=Plain Blog&summary=极简主义&pics=https://gitee.com/plain-dev/oss/raw/master/upic_library/MOvJES.png&url=https://plain-dev.com/edit-adapter/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://plain-dev.com/edit-adapter/&text=Plain Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#演示"><span class="post-toc-number">1.</span> <span class="post-toc-text">演示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加EditAdapter到你的项目"><span class="post-toc-number">2.</span> <span class="post-toc-text">添加EditAdapter到你的项目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">如何使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#更新日志"><span class="post-toc-number">4.</span> <span class="post-toc-text">更新日志</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#v1-0-3-alpha"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">v1.0.3-alpha</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#v1-0-2-alpha"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">v1.0.2-alpha</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#v1-0-1-alpha"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">v1.0.1-alpha</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#v1-0-alpha"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">v1.0-alpha</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其它"><span class="post-toc-number">5.</span> <span class="post-toc-text">其它</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <div align="center">
+  <img src="https://gitee.com/plain-dev/oss/raw/master/upic_library/xv4cBZ.png" width='150px' alt="ic_launcher-web">
+</div>
+
+<blockquote>
+<p>最近项目有个需求，需要在收藏列表增加编辑模式，包括全选、删除、长按进入编辑模式等，于是对<code>Adapter</code>进行了一下封装，并开源出来，一起交流学习</p>
+</blockquote>
+<h3 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h3><p><img src="https://gitee.com/plain-dev/oss/raw/master/upic_library/XV6IHn.gif" alt="demo"></p>
+<h3 id="添加EditAdapter到你的项目"><a href="#添加EditAdapter到你的项目" class="headerlink" title="添加EditAdapter到你的项目"></a>添加<code>EditAdapter</code>到你的项目</h3><ol>
+<li>在项目的 <code>build.gradle</code> 中添加：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">	    ...</span><br><span class="line">	    maven &#123; url &#39;https:&#x2F;&#x2F;jitpack.io&#39; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>添加依赖 <a href="https://jitpack.io/#plain-dev/EditAdapter" target="_blank" rel="noopener"><img src="https://jitpack.io/v/plain-dev/EditAdapter.svg" alt=""></a></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;TAG替换为上方的最新版本号</span><br><span class="line">dependencies &#123;</span><br><span class="line">    implementation &#39;com.github.plain-dev:EditAdapter:vTAG&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><ol>
+<li>在你的数据实体类中继承<code>SelectedBean</code></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDataBean</span> <span class="keyword">extends</span> <span class="title">SelectedBean</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="keyword">private</span> String content;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDataBean</span><span class="params">(String title, String content)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.title = title;</span><br><span class="line">        <span class="keyword">this</span>.content = content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  	......</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建一个适配器，继承自<code>EditAdapter&lt;T extends ISelected&gt;</code></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyEditAdapter</span> <span class="keyword">extends</span> <span class="title">EditAdapter</span>&lt;<span class="title">MyDataBean</span>&gt; </span>&#123;</span><br><span class="line">    </span><br><span class="line">  	......</span><br><span class="line">      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在构造方法中指定数据和布局</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MyEditAdapter</span><span class="params">(List&lt;MyDataBean&gt; list)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(list, R.layout.item_edit,R.layout.item_empty);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>创建数据视图和空数据视图</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> BaseEditViewHolder <span class="title">createViewHolder</span><span class="params">(View itemView)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyViewHolder(itemView);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> BaseEditViewHolder <span class="title">createEmptyViewHolder</span><span class="params">(View itemView)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> EmptyViewHolder(itemView);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>指定触摸模式</li>
+</ol>
+<p><code>TOUCH_MODE_ROOT</code>: 点击整个item选中</p>
+<p><code>TOUCH_MODE_CHILD</code>: 点击CheckBox选中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">getTouchMode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//指定触摸选择模式</span></span><br><span class="line">    <span class="keyword">return</span> EditAdapter.TOUCH_MODE_ROOT;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>数据绑定</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">convert</span><span class="params">(MyDataBean item, BaseEditViewHolder vh)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (vh <span class="keyword">instanceof</span> MyViewHolder)&#123;</span><br><span class="line">        MyViewHolder viewHolder = (MyViewHolder) vh;</span><br><span class="line">        viewHolder.tvTitle.setText(item.getTitle());</span><br><span class="line">        viewHolder.tvContent.setText(item.getContent());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>自定义ViewHolder，继承<code>BaseEditViewHolder</code>，并重写<code>getHideView</code>和<code>getCheckBox</code>方法，返回隐藏区域View和选择按钮</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyViewHolder</span> <span class="keyword">extends</span> <span class="title">BaseEditViewHolder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyViewHolder</span><span class="params">(@NonNull View itemView)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(itemView);</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getHideView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> checkBox;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CheckBox <span class="title">getCheckBox</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> checkBox;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li><p>在<code>Activity</code>或<code>Fragment</code>中更新UI</p>
+<ul>
+<li><p>指定模式为<code>EDIT_MODE</code>（进入编辑模式）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myEditAdapter.changeMode(EditAdapter.EDIT_MODE);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定模式为<code>SHOW_MODE</code>（退出编辑模式）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myEditAdapter.changeMode(EditAdapter.SHOW_MODE);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全选所有项</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myEditAdapter.selectedAllItem();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>反选所有项</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myEditAdapter.unSelectedAllItem();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除选择项</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myEditAdapter.removeSelectedItem();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断是否选择全部 (用来判断点击全选按钮时，应该调用<code>selectedAllItem</code>还是<code>unSelectedAllItem</code>)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myEditAdapter.isSelectedAllItem()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>注册事件监听器</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">myEditAdapter.setEditSelectedListener(<span class="keyword">new</span> IEditSelectedListener() &#123;</span><br><span class="line">  	<span class="comment">//回调当前选中项数量</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSelectedItemCount</span><span class="params">(<span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">        tvCheckItemCount.setText(String.format(<span class="string">"共选中%s项"</span>, count));</span><br><span class="line">    &#125;</span><br><span class="line">		</span><br><span class="line">  	<span class="comment">//回调长按进入编辑模式</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLongClickEnterEditMode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        myEditAdapter.changeMode(EditAdapter.EDIT_MODE);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>10、如果使用下拉刷新控件，记得在进入编辑模式后，关闭下拉刷新,以SmartRefreshLayout为例</p>
+<p>进入编辑模式后</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smartRefreshLayout.setEnableRefresh(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>退出编辑模式后</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smartRefreshLayout.setEnableRefresh(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>🔎详细用法欢迎进入<a href="https://github.com/plain-dev/EditAdapter" target="_blank" rel="noopener">仓库</a>查看Demo</p>
+<h3 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h3><h4 id="v1-0-3-alpha"><a href="#v1-0-3-alpha" class="headerlink" title="v1.0.3-alpha"></a>v1.0.3-alpha</h4><p>本次更新内容如下</p>
+<ul>
+<li>fix:手动选择全部item后，再次点击全选按钮无效的问题</li>
+<li>add:为解决上述bug，新增一个方法判断当前是否选择全部</li>
+</ul>
+<h4 id="v1-0-2-alpha"><a href="#v1-0-2-alpha" class="headerlink" title="v1.0.2-alpha"></a>v1.0.2-alpha</h4><p>本次更新内容如下</p>
+<ul>
+<li>add:长按进入编辑模式</li>
+<li>add:设置空数据视图</li>
+<li>modify:优化代码逻辑</li>
+</ul>
+<h4 id="v1-0-1-alpha"><a href="#v1-0-1-alpha" class="headerlink" title="v1.0.1-alpha"></a>v1.0.1-alpha</h4><p>本次更新内容如下</p>
+<ul>
+<li>fix:滑到最底部删除元素时发生”Inconsistency detected”的问题</li>
+</ul>
+<h4 id="v1-0-alpha"><a href="#v1-0-alpha" class="headerlink" title="v1.0-alpha"></a>v1.0-alpha</h4><ul>
+<li><del>首个预览版</del></li>
+<li>有些问题，请使用新版</li>
+</ul>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><ol>
+<li>有问题欢迎提交<code>issues</code></li>
+<li>状态图标来源<a href="https://www.iconfont.cn/" target="_blank" rel="noopener">iconfont</a>，侵删</li>
+</ol>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-03-06");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-03-06T03:56:47.160Z" itemprop="datePublished">2020-03-06</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/'>开源项目</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Android/" rel="tag">#&nbsp;Android</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/flutter-start/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Flutter笔记之环境搭建</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/design-patterns-template-method/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">设计模式之模板方法（抽象类的应用）</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "WfyboDNB3X0Wrr5Tm2Jvd2Ii-MdYXbMMI",
+        appKey: "6FBsLgRXWbuDJ2AdCOMN7P1q",
+        placeholder: "请在发表评论时留下您的电子邮件地址，以便您收到消息提醒...",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'mp',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: false
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://plain-dev.com">Plain Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2016;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>
