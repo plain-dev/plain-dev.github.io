@@ -53,20 +53,20 @@
     <title>Plain&#39;s Blog</title>
 
     <!-- Favicons -->
-    <link rel="icon" type="image&#x2F;ico" href="/img/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="192x192" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="32x32" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="16x16" href="/img/icon.png"><link rel="mask-icon" href="/img/icon.png" color="#F0F2F0"><meta name="theme-color" content="#F0F2F0">
+    <link rel="icon" type="image&#x2F;ico" href="/img/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="192x192" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="32x32" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="16x16" href="/img/icon.png"><link rel="mask-icon" href="/img/icon.png" color="#f4f7f7"><meta name="theme-color" content="#f4f7f7">
 
     <!-- ### Import File ### -->
     <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
     body {
-        background-color: #F0F2F0;
+        background-color: #f4f7f7;
     }
 
     a, a:visited {
-        color: #0F4C81;
+        color: #e85a71;
     }
 
     a:active, a:focus, a:hover {
-        color: #0F4C81;
+        color: #e85a71;
         opacity: .75;
     }
 
@@ -74,28 +74,28 @@
     #post-content a:hover,
     #post-content a:focus,
     #post-content a:visited {
-        color: #0F4C81;
+        color: #e85a71;
         opacity: 1;
     }
 
     
 
     .post-entry .card-body a {
-        color: #F46F60;
+        color: #8E354A;
     }
 
     .avatar {
-        background: #F46F60;
+        background: #8E354A;
     }
 
     .navbar-link,
     .navbar-link:visited,
     .timeline .timeline-item .timeline-icon.icon-lg {
-        color: #F46F60;
+        color: #8E354A;
     }
 
     .navbar-link:hover {
-        color: #F46F60;
+        color: #8E354A;
         opacity: .8;
     }
 
@@ -103,22 +103,22 @@
     #disqus_click_btn,
     #disqus-switch-to-direct,
     #disqus-loadmore-button {
-        background: #F46F60;
-        border-color: #F46F60;
+        background: #8E354A;
+        border-color: #8E354A;
         color: #fff;
     }
 
     #post-toc a.post-toc-link,
     #post-toc a.post-toc-link:visited,
     .share-menu.menu .menu-item>a {
-        color: #F46F60;
+        color: #8E354A;
     }
 
     .share-menu.menu .menu-item>a:hover,
     .share-menu.menu .menu-item>a:focus,
     .share-menu.menu .menu-item>a:visited {
         color: #50596c;
-        background: #F0F2F0;
+        background: #f4f7f7;
         opacity: .85;
     }
 </style><link rel="stylesheet" href="/css/style.min.css">
@@ -145,7 +145,7 @@
     
 
 
-    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Plain's Blog"><meta name="msapplication-starturl" content="https://plain-dev.com"><meta name="msapplication-navbutton-color" content="#F0F2F0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plain's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Plain's Blog"><meta name="msapplication-starturl" content="https://plain-dev.com"><meta name="msapplication-navbutton-color" content="#f4f7f7"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plain's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
     <meta property="og:title" content="Plain&#39;s Blog"><meta property="og:site_name" content="Plain&#39;s Blog"><meta property="og:type" content="website"><meta property="og:url" content="https://plain-dev.com/page/5/"><meta property="og:locale" content="zh-CN"><meta name="description" content="极简主义 - Plain - Plain&#39;s Blog"><meta name="keywords" content="数码,科技,动漫,游戏,开发者">
@@ -552,21 +552,25 @@ Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有
         <div class="columns col-gapless">
             
                 <div class="column column-thumbnail col-4 col-lg-12">
-                    <a href="/java-member-methods-of-the-class/">
+                    <a href="/java-extends/">
                         <div class="post-thumbnail lazyload" data-bg="url(https://gitee.com/plain-dev/oss/raw/master/upic_library/F0lZ7E.jpg)"></div>
                     </a>
                 </div>
                 <div class="column column-body col-8 col-lg-12">
                     
-    <h2 class="h5 mb-0 card-header"><a class="card-title" href="/java-member-methods-of-the-class/" rel="bookmark">Java类的成员方法</a></h2>
+    <h2 class="h5 mb-0 card-header"><a class="card-title" href="/java-extends/" rel="bookmark">Java继承（extends）</a></h2>
 
 
 <p class="mb-0 card-body">
     
-        
-1.1 输入一个数，打印出乘法表
+        继承
+父类也称作超类、基类等
+Java只有单继承，没有像C++那样的多继承。多继承会引起混乱，不利于后期维护
+Java中接口有多继承
+子类继承父类，可以得到分类的全部属性和方法（除了父类的构造方法），但不见得可以直接访问（比如，父类私有的属性和方法）
+一个类有默认的父类：java.lang.Object
 
-    <a href="/java-member-methods-of-the-class/">阅读全文</a>
+    <a href="/java-extends/">阅读全文</a>
 </p>
 
 
@@ -595,25 +599,21 @@ Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有
         <div class="columns col-gapless">
             
                 <div class="column column-thumbnail col-4 col-lg-12">
-                    <a href="/java-extends/">
+                    <a href="/java-member-methods-of-the-class/">
                         <div class="post-thumbnail lazyload" data-bg="url(https://gitee.com/plain-dev/oss/raw/master/upic_library/F0lZ7E.jpg)"></div>
                     </a>
                 </div>
                 <div class="column column-body col-8 col-lg-12">
                     
-    <h2 class="h5 mb-0 card-header"><a class="card-title" href="/java-extends/" rel="bookmark">Java继承（extends）</a></h2>
+    <h2 class="h5 mb-0 card-header"><a class="card-title" href="/java-member-methods-of-the-class/" rel="bookmark">Java类的成员方法</a></h2>
 
 
 <p class="mb-0 card-body">
     
-        继承
-父类也称作超类、基类等
-Java只有单继承，没有像C++那样的多继承。多继承会引起混乱，不利于后期维护
-Java中接口有多继承
-子类继承父类，可以得到分类的全部属性和方法（除了父类的构造方法），但不见得可以直接访问（比如，父类私有的属性和方法）
-一个类有默认的父类：java.lang.Object
+        
+1.1 输入一个数，打印出乘法表
 
-    <a href="/java-extends/">阅读全文</a>
+    <a href="/java-member-methods-of-the-class/">阅读全文</a>
 </p>
 
 
@@ -840,7 +840,7 @@ window.lazyLoadOptions = {
 (function() {
     var copyrightNow = new Date().getFullYear();
     var copyrightContent = document.getElementById('copyright-year');
-    var copyrightSince = 2016;
+    var copyrightSince = 2018;
     if (copyrightSince === copyrightNow) {
         copyrightContent.textContent = copyrightNow;
     } else {
