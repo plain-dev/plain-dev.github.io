@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://plain-dev.com/edit-adapter/</loc>
+    
+    <lastmod>2020-04-16T08:50:24.402Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://plain-dev.com/setapp-recommend/</loc>
     
     <lastmod>2020-04-05T11:03:09.017Z</lastmod>
@@ -390,13 +397,6 @@
     <loc>https://plain-dev.com/leetcode-contains-duplicate/</loc>
     
     <lastmod>2019-12-13T08:49:31.415Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plain-dev.com/edit-adapter/</loc>
-    
-    <lastmod>2019-12-09T11:11:04.017Z</lastmod>
     
   </url>
   
