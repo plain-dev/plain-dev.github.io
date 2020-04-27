@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://plain-dev.com/about/index.html</loc>
+    
+    <lastmod>2020-04-27T03:38:26.136Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://plain-dev.com/edit-adapter/</loc>
     
     <lastmod>2020-04-16T08:50:24.402Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>https://plain-dev.com/register-apple-id-usa/</loc>
     
     <lastmod>2020-03-10T03:41:04.721Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plain-dev.com/about/index.html</loc>
-    
-    <lastmod>2020-03-10T03:35:07.275Z</lastmod>
     
   </url>
   
