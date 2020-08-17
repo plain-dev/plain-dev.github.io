@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://plain-dev.com/npm-webpack-init-demo-project/</loc>
+    
+    <lastmod>2020-08-17T10:16:31.370Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://plain-dev.com/artifactory-install/</loc>
     
     <lastmod>2020-06-14T03:07:14.809Z</lastmod>
