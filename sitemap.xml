@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://plain-dev.com/kotlin-standard-funcation/</loc>
+    
+    <lastmod>2020-08-18T03:31:31.337Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://plain-dev.com/android-hilt-first-experience/</loc>
     
     <lastmod>2020-08-18T03:06:18.049Z</lastmod>
