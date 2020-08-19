@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+    <link rel="dns-prefetch" href="//hm.baidu.com">
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Kotlin 中委托属性和延迟初始化的工作方式 | Plain&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="192x192" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="32x32" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="16x16" href="/img/icon.png"><link rel="mask-icon" href="/img/icon.png" color="#F8FAFF"><meta name="theme-color" content="#F8FAFF">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #F8FAFF;
+    }
+
+    a, a:visited {
+        color: #6A4C9C;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #6A4C9C;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #6A4C9C;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #6A4C9C;
+    }
+
+    .avatar {
+        background: #6A4C9C;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #6A4C9C;
+    }
+
+    .navbar-link:hover {
+        color: #6A4C9C;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #6A4C9C;
+        border-color: #6A4C9C;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #6A4C9C;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #F8FAFF;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Plain's Blog"><meta name="msapplication-starturl" content="https://plain-dev.com"><meta name="msapplication-navbutton-color" content="#F8FAFF"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plain's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Kotlin 中委托属性和延迟初始化的工作方式 | Plain&#39;s Blog"><meta property="og:site_name" content="Plain&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/"><meta property="og:locale" content="zh-CN"><meta name="description" content="在支持面向对象范式的编程语言中，相信大家对访问属性应该非常熟悉了吧。Kotlin 就提供了很多这样的方法，通过 by lazy 实现属性的懒加载就是一个很好的例子。 在这篇文章中，我们将一起去看看如何使用 Kotlin 中的委托属性以及 by lazy 的懒加载然后深入了解它们内部的工作原理，一步步揭开它们语法糖衣。 可空类型我认为你们中很多人对 nullable 已经了然于胸，但是让我们再来看看 - Plain - Plain&#39;s Blog"><meta name="keywords" content="Kotlin, Delegation, Lazy, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/VLy2C7.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/UK7wrY.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/7UUAY6.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/n5eoQ5.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/4xFLYF.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/ToKFdM.png"><meta property="article:published_time" content="2020-08-19T04:59:42.445Z"><meta property="article:modified_time" content="2020-08-19T05:02:53.403Z"><meta property="og:updated_time" content="2020-08-19T05:02:53.403Z"><meta property="article:author" content="Plain"><meta property="article:tag" content="Kotlin, Delegation, Lazy, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/">
+
+    <meta name="generator" content="Hexo 4.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-152396978-1', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?a576f1cb9fdd2eb09be64aecb926dda9';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/",
+    "@type": "BlogPosting",
+    "logo": "https://plain-dev.com/img/icon.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/"
+    },
+    "headline": "Kotlin 中委托属性和延迟初始化的工作方式 | Plain&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://plain-dev.com/img/icon.png"
+    },
+    
+    "datePublished": "2020-08-19T04:59:42.445Z",
+    "dateModified": "2020-08-19T05:02:53.403Z",
+    "author": {
+        "@type": "Person",
+        "name": "Plain",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://gitee.com/plain-dev/oss/raw/master/v2/J4rsMp.jpg"
+        },
+        "description": "休想打败我的生活🔥"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Plain&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://plain-dev.com/img/icon.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://plain-dev.com/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Kotlin, Delegation, Lazy, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客",
+    "description": "在支持面向对象范式的编程语言中，相信大家对访问属性应该非常熟悉了吧。Kotlin 就提供了很多这样的方法，通过 by lazy 实现属性的懒加载就是一个很好的例子。 在这篇文章中，我们将一起去看看如何使用 Kotlin 中的委托属性以及 by lazy 的懒加载然后深入了解它们内部的工作原理，一步步揭开它们语法糖衣。 可空类型我认为你们中很多人对 nullable 已经了然于胸，但是让我们再来看看 - Plain - Plain&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Plain&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                休想打败我的生活🔥
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/tags/" class="navbar-link">标签</a>
+    
+        <a href="/about/" class="navbar-link">关于</a>
+    
+        <a href="/links/" class="navbar-link">友链</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=Plain's Blog&url=https://plain-dev.com&pic=https://plain-dev.com/img/icon.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Plain's Blog&url=https://plain-dev.com&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain's Blog&title=Kotlin 中委托属性和延迟初始化的工作方式&summary=极简主义&pics=https://plain-dev.com/img/icon.png&url=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://plain-dev.com&text=Kotlin 中委托属性和延迟初始化的工作方式" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Kotlin 中委托属性和延迟初始化的工作方式</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="https://gitee.com/plain-dev/oss/raw/master/v2/J4rsMp.jpg" src="/img/suka-lazyload.gif" alt="Plain's Avatar">
+        <span>2020-08-19</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/Kotlin%E7%AC%94%E8%AE%B0/">Kotlin笔记</a>
+        
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=Kotlin 中委托属性和延迟初始化的工作方式&url=https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/&pic=https://plain-dev.com/img/icon.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=Kotlin 中委托属性和延迟初始化的工作方式&url=https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain's Blog&title=Plain's Blog&summary=极简主义&pics=https://plain-dev.com/img/icon.png&url=https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/&text=Plain's Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#可空类型"><span class="post-toc-number">1.</span> <span class="post-toc-text">可空类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#可空类型在自己生命周期内初始化"><span class="post-toc-number">2.</span> <span class="post-toc-text">可空类型在自己生命周期内初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#非空类型"><span class="post-toc-number">3.</span> <span class="post-toc-text">非空类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lateinit-我稍后会初始化非空类型的属性"><span class="post-toc-number">4.</span> <span class="post-toc-text">lateinit: 我稍后会初始化非空类型的属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#只读属性"><span class="post-toc-number">5.</span> <span class="post-toc-text">只读属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#非空只读属性的问题"><span class="post-toc-number">6.</span> <span class="post-toc-text">非空只读属性的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#懒加载-lazy-Initialization"><span class="post-toc-number">7.</span> <span class="post-toc-text">懒加载(lazy Initialization)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#属性委托（代理）"><span class="post-toc-number">8.</span> <span class="post-toc-text">属性委托（代理）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#by-lazy-的工作原理"><span class="post-toc-number">9.</span> <span class="post-toc-text">by lazy 的工作原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#带有-lazy-的委托属性"><span class="post-toc-number">10.</span> <span class="post-toc-text">带有 lazy() 的委托属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Lazy-的具体实现"><span class="post-toc-number">11.</span> <span class="post-toc-text">Lazy 的具体实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SYNCHRONIZED-→-SynchronizedLazyImpl"><span class="post-toc-number">11.1.</span> <span class="post-toc-text">SYNCHRONIZED → SynchronizedLazyImpl</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#PUBLICATION-→-SafePublicationLazyImpl"><span class="post-toc-number">11.2.</span> <span class="post-toc-text">PUBLICATION → SafePublicationLazyImpl</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NONE-→-UnsafeLazyImpl"><span class="post-toc-number">11.3.</span> <span class="post-toc-text">NONE → UnsafeLazyImpl</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Lazy-实现的默认行为"><span class="post-toc-number">12.</span> <span class="post-toc-text">Lazy 实现的默认行为</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SynchronizedLazyImpl"><span class="post-toc-number">12.1.</span> <span class="post-toc-text">SynchronizedLazyImpl</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Kotlin-的委托属性将会让你快乐-😀"><span class="post-toc-number">13.</span> <span class="post-toc-text">Kotlin 的委托属性将会让你快乐 😀</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>在支持面向对象范式的编程语言中，相信大家对访问属性应该非常熟悉了吧。<strong>Kotlin</strong> 就提供了很多这样的方法，通过 <strong>by lazy</strong> 实现属性的<strong>懒加载</strong>就是一个很好的例子。</p>
+<p>在这篇文章中，我们将一起去看看如何使用 <strong>Kotlin</strong> 中的<strong>委托属性</strong>以及 <strong>by lazy</strong> 的<strong>懒加载</strong>然后深入了解它们内部的<strong>工作原理</strong>，一步步揭开它们<strong>语法糖衣</strong>。</p>
+<h2 id="可空类型"><a href="#可空类型" class="headerlink" title="可空类型"></a>可空类型</h2><p>我认为你们中很多人对 <strong>nullable</strong> 已经了然于胸，但是让我们再来看看它。我们使用 <strong>Kotlin</strong> 来开发 <strong>Android</strong> 时你可能会像如下这样写：</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> helloMessage : String = <span class="string">"Hello"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="可空类型在自己生命周期内初始化"><a href="#可空类型在自己生命周期内初始化" class="headerlink" title="可空类型在自己生命周期内初始化"></a>可空类型在自己生命周期内初始化</h2><p>在上述例子中，在对象创建的时候就初始化，这也没什么大的问题。然而，如果在特定的初始化过程之后引用它，则不能提前声明和使用值，因为它有自己的生命周期来初始化自身。</p>
+<p>让我们一起来看下一些熟悉Java代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> TextView mWelcomeTextView;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        mWelcomeTextView = (TextView) findViewById(R.id.msgView);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你可以使用 <strong>Kotlin</strong> 来实现上述代码，通过将上述 <strong>mWelcomeTextView</strong> 声明成<strong>可空类型</strong>就可以了。</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">	<span class="comment">// 声明成可空类型</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> mWelcomeTextView: TextView? = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        mWelcomeTextView = findViewById(R.id.msgView) <span class="keyword">as</span> TextView</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="非空类型"><a href="#非空类型" class="headerlink" title="非空类型"></a>非空类型</h2><p>上面那个例子代码运行良好，但是在代码中使用属性的之前每次都需要检查它是否为 <strong>null</strong> 就显得难受了。这一点你完全可以使用<strong>非空类型</strong>实现它。</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span>: <span class="type">AppCompatActivity </span></span>() &#123; </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> mWelcomeTextView: TextView</span><br><span class="line">    ... </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然上述代码，你需要使用 <strong>lateinit</strong> 来告诉编译器，你将<strong>稍后</strong>为组件 <strong>mWelcomeTextView</strong> 初始化值。</p>
+<h2 id="lateinit-我稍后会初始化非空类型的属性"><a href="#lateinit-我稍后会初始化非空类型的属性" class="headerlink" title="lateinit: 我稍后会初始化非空类型的属性"></a><strong>lateinit</strong>: 我稍后会初始化非空类型的属性</h2><p>与我们通常讨论的<a href="https://en.wikipedia.org/wiki/Lazy_initialization" target="_blank" rel="noopener" title="延迟初始化(lazy initialization)">延迟初始化(lazy initialization)</a> 不同的是，<strong>lateinit</strong> 允许编译器识别非空类型属性的值不存储在构造函数阶段以致于可以正常编译。</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> mWelcomeTextView: TextView</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        mWelcomeTextView = findViewById(R.id.msgView) <span class="keyword">as</span> TextView</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你想要了解更多，请查看<a href="https://www.kotlincn.net/docs/reference/properties.html" target="_blank" rel="noopener" title="属性与字段">这里</a></p>
+<h2 id="只读属性"><a href="#只读属性" class="headerlink" title="只读属性"></a>只读属性</h2><p>通常，如果组件的字段不是基本数据类型或者内置类型，则可以发现引用是保留在组件整个生命周期中的。</p>
+<p>例如，在 <strong>Android</strong> 应用程序中，大多数的组件引用是在 <strong>Acitivity</strong> 生命周期中保持不变的。换句话说，这就意味着你很少需要更改组件的引用。</p>
+<p>基于这一点，我们可以很容易想到以下这点：</p>
+<blockquote>
+<p>“如果属性的值通常保留在组件的生命周期中，那么只读类型的属性是否足以保持该值？”</p>
+</blockquote>
+<p>我认为可以的，要做到这一点，乍看一眼只需将 <strong>var</strong> 改为 <strong>val</strong> 一点改动就可以了。</p>
+<h2 id="非空只读属性的问题"><a href="#非空只读属性的问题" class="headerlink" title="非空只读属性的问题"></a>非空只读属性的问题</h2><p>但是，当我们声明<strong>只读属性</strong>时，我们面临的问题是无法定义执行初始化的位置</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> mWelcomeTextView: TextView</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="comment">// Where do I move the initialization code????? </span></span><br><span class="line">		<span class="comment">// 我应该把这个初始化的代码移到哪呢？？？？？</span></span><br><span class="line">        <span class="comment">// mWelcomeTextView = findViewById(R.id.msgView) as TextView</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在让我们尝试解决最后一个问题：<strong>“我们在哪初始化只读属性呢？”</strong></p>
+<h2 id="懒加载-lazy-Initialization"><a href="#懒加载-lazy-Initialization" class="headerlink" title="懒加载(lazy Initialization)"></a>懒加载(lazy Initialization)</h2><p>当实现在 <strong>Kotlin</strong> 中执行延迟初始化的只读属性时，<strong>by lazy</strong> 也许就特别有用了。</p>
+<blockquote>
+<p><code>by lazy{...}</code> 执行初始化程序，其中首先使用的是定义的属性，而不是它的声明。</p>
+</blockquote>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> messageView : TextView <span class="keyword">by</span> lazy &#123;</span><br><span class="line">        <span class="comment">// 下面这段代码将在第一次访问 messageView 时执行</span></span><br><span class="line">        findViewById(R.id.message_view) <span class="keyword">as</span> TextView</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">onSayHello</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// 真正初始化将会在这执行!!</span></span><br><span class="line">        messageView.text = <span class="string">"Hello"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在，我们可以声明一个<strong>只读属性</strong>，而不必担心 <strong>messageView</strong> 的初始化点的问题。让我们看看<strong>懒加载背后原理</strong>是怎么样的。</p>
+<h2 id="属性委托（代理）"><a href="#属性委托（代理）" class="headerlink" title="属性委托（代理）"></a>属性委托（代理）</h2><p><strong>Delegation</strong> 的意思就是<strong>委托</strong>。它意味着通过<strong>委托者</strong>可以执行某些操作，而不是直接通过<strong>原始访问者</strong>执行操作。</p>
+<p><strong>属性委托</strong>是<strong>委托属性</strong>的 <strong>getter/setter</strong> 方法，它允许<strong>委托对象</strong>在读取和写入值时插入执行一些中间操作。</p>
+<p><strong>Kotlin</strong> 支持将<strong>接口</strong>（类委托）或<strong>访问器</strong>（委托属性）的实现委托给另一个对象。</p>
+<blockquote>
+<p>Delegation is a something with a historic background. :) (Source:<a href="https://commons.wikimedia.org/wiki/File:Byzantine_emperor_Leo_VI_receives_a_Bulgarian_delegation.jpg" target="_blank" rel="noopener">Wikipedia commons</a>)</p>
+</blockquote>
+<p>你可以通过 <strong>by &lt;delegate&gt;</strong> 形式来声明一个<a href="https://www.kotlincn.net/docs/reference/delegated-properties.html" target="_blank" rel="noopener" title="委托属性">委托属性</a></p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> / <span class="keyword">var</span> &lt;property name&gt;: &lt;Type&gt; <span class="keyword">by</span> &lt;delegate&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>属性</strong>的委托可以像如下方式定义：</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Delegate</span> </span>&#123;</span><br><span class="line">    <span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> <span class="title">getValue</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            thisRef: <span class="type">Any</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            property: <span class="type">KProperty</span>&lt;*&gt;</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: String &#123;</span><br><span class="line">        <span class="comment">// return value</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> <span class="title">setValue</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            thisRef: <span class="type">Any</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            property: <span class="type">KProperty</span>&lt;*&gt;, value: <span class="type">String</span></span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span> &#123;</span><br><span class="line">        <span class="comment">// assign</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对值的所有<strong>读取操作</strong>都会委托调用 <strong>getValue()</strong> 方法，同理，对值的所有<strong>写操作</strong>都会委托调用 <strong>setValue()</strong> 方法。</p>
+<h2 id="by-lazy-的工作原理"><a href="#by-lazy-的工作原理" class="headerlink" title="by lazy 的工作原理"></a><strong>by lazy</strong> 的工作原理</h2><p>现在让我们再次重新研究下上述例子中属性的代码。</p>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/VLy2C7.png" alt=""></p>
+<p>它实际上就是一个<strong>属性委托</strong>！</p>
+<p>我们可以把 <strong>by lazy</strong> 修饰的属性理解为是具有 <strong>lazy 委托</strong>的<strong>委托属性</strong>。</p>
+<p>所以，<strong>lazy</strong> 是如何工作的呢？让我们一起在 Kotlin 标准库参考中总结 <strong>lazy()</strong> 方法，如下所示：</p>
+<ol>
+<li><strong>lazy()</strong> 返回的是一个存储在 <strong>lambda 初始化器</strong>中的 <strong>Lazy&lt;T&gt;</strong> 类型实例。</li>
+<li><strong>getter</strong> 的第一次调用执行传递给 <strong>lazy()</strong> 的 <strong>lambda</strong> 并存储其结果。</li>
+<li>后面的话，<strong>getter</strong> 调用只返回存储中的值。</li>
+</ol>
+<blockquote>
+<p>简单地说，<strong>lazy</strong>创建一个实例，在<strong>第一次</strong>访问属性值时执行<strong>初始化</strong>，存储结果并<strong>返回存储的值</strong>。</p>
+</blockquote>
+<h2 id="带有-lazy-的委托属性"><a href="#带有-lazy-的委托属性" class="headerlink" title="带有 lazy() 的委托属性"></a>带有 <strong>lazy()</strong> 的委托属性</h2><p>让我们编写一个简单的 <strong>Kotlin</strong> 代码来检查 <strong>lazy</strong> 的实现。</p>
+<figure class="highlight kt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">val</span> myName: String <span class="keyword">by</span> lazy &#123; <span class="string">"John"</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你将其<strong>反编译</strong>为 <strong>Java</strong> 代码，则可以看到以下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Lazy myName$delegate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// $FF: synthetic field</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> KProperty[] $$delegatedProperties = ...</span><br><span class="line">    <span class="meta">@NotNull</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">getMyName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Lazy var1 = <span class="keyword">this</span>.myName$delegate;</span><br><span class="line">        KProperty var3 = $$delegatedProperties[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">return</span> (String)var1.getValue();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Demo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.myName$delegate =</span><br><span class="line">            LazyKt.lazy((Function0)<span class="keyword">null</span>.INSTANCE);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>$delegate</strong> 后缀被拼接到字段名称后面: <strong>myName$delegate</strong></li>
+<li>注意 <strong>myName$delegate</strong> 的类型是 <strong>Lazy</strong> 类型不是 <strong>String</strong> 类型</li>
+<li>在构造器中，<strong>LazyKt.lazy()</strong> 函数返回值赋值给了** myName$delegate**</li>
+<li><strong>LazyKt.lazy()</strong> 方法负责执行指定的<strong>初始化块</strong></li>
+</ul>
+<p>调用 <strong>getMyName()</strong> 方法实际过程是将通过调用 <strong>myName$delegate</strong> 的 <strong>Lazy</strong> 实例中的 <strong>getValue()</strong> 方法并返回相应的值。</p>
+<h2 id="Lazy-的具体实现"><a href="#Lazy-的具体实现" class="headerlink" title="Lazy 的具体实现"></a><strong>Lazy</strong> 的具体实现</h2><p><strong>lazy()</strong> 方法返回的是一个 <strong>Lazy&lt;T&gt;</strong> 类型的对象，该对象处理 <strong>lambda</strong> 函数（<strong>初始化程序块</strong>），根据线程执行模式（<strong>LazyThreadSafetyMode</strong>）以稍微几种不同的方式执行初始化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@kotlin</span>.jvm.JvmVersion</span><br><span class="line"><span class="keyword">public</span> fun &lt;T&gt; lazy(</span><br><span class="line">    mode: LazyThreadSafetyMode,</span><br><span class="line">    initializer: () -&gt; T</span><br><span class="line">): Lazy&lt;T&gt; =</span><br><span class="line">    when (mode) &#123;</span><br><span class="line">        LazyThreadSafetyMode.SYNCHRONIZED -&gt;</span><br><span class="line">            SynchronizedLazyImpl(initializer)</span><br><span class="line">        LazyThreadSafetyMode.PUBLICATION -&gt;</span><br><span class="line">            SafePublicationLazyImpl(initializer)</span><br><span class="line">        LazyThreadSafetyMode.NONE -&gt;</span><br><span class="line">            UnsafeLazyImpl(initializer)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>所有这些都负责调用给定的 <strong>lambda</strong> 块进行<strong>延迟初始化</strong></p>
+<h3 id="SYNCHRONIZED-→-SynchronizedLazyImpl"><a href="#SYNCHRONIZED-→-SynchronizedLazyImpl" class="headerlink" title="SYNCHRONIZED → SynchronizedLazyImpl"></a>SYNCHRONIZED → <a href="https://github.com/JetBrains/kotlin/blob/1.1.3/libraries/stdlib/src/kotlin/util/Lazy.kt#L110" target="_blank" rel="noopener" title="SynchronizedLazyImpl">SynchronizedLazyImpl</a></h3><ul>
+<li><strong>初始化操作</strong>仅仅在首先调用的<strong>第一个线程</strong>上执行</li>
+<li>然后，<strong>其他线程</strong>将引用<strong>缓存</strong>后的值。</li>
+<li><strong>默认模式</strong>就是(<strong>LazyThreadSafetyMode.SYNCHRONIZED</strong>)</li>
+</ul>
+<h3 id="PUBLICATION-→-SafePublicationLazyImpl"><a href="#PUBLICATION-→-SafePublicationLazyImpl" class="headerlink" title="PUBLICATION → SafePublicationLazyImpl"></a>PUBLICATION → <a href="https://github.com/JetBrains/kotlin/blob/1.1.3/libraries/stdlib/src/kotlin/util/Lazy.kt#L176" target="_blank" rel="noopener" title="SafePublicationLazyImpl">SafePublicationLazyImpl</a></h3><p>它可以<strong>同时</strong>在<strong>多个线程</strong>中调用，并且可以在<strong>全部或部分线程</strong>上<strong>同时进行初始化</strong>。<br>但是，如果<strong>某个值</strong>已由<strong>另一个线程初始化</strong>，则将<strong>返回该值</strong>而<strong>不执行初始化</strong>。</p>
+<h3 id="NONE-→-UnsafeLazyImpl"><a href="#NONE-→-UnsafeLazyImpl" class="headerlink" title="NONE → UnsafeLazyImpl"></a>NONE → <a href="https://github.com/JetBrains/kotlin/blob/1.1.3/libraries/stdlib/src/kotlin/util/Lazy.kt#L146" target="_blank" rel="noopener" title="UnsafeLazyImpl">UnsafeLazyImpl</a></h3><ul>
+<li>只需在第一次访问时初始化它，或返回存储的值。</li>
+<li>不考虑多线程，所以它<strong>不是线程安全</strong>的。</li>
+</ul>
+<h2 id="Lazy-实现的默认行为"><a href="#Lazy-实现的默认行为" class="headerlink" title="Lazy 实现的默认行为"></a><strong>Lazy</strong> 实现的默认行为</h2><p><strong>SynchronizedLazyImpl</strong> 和 <strong>SafePublicationLazyImpl</strong>，<strong>UnsafeLazyImpl</strong> 通过以下过程执行延迟初始化。我们来看看前面的例子。</p>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/UK7wrY.png" alt="简单的代码示例始终是一件好事！:)"></p>
+<ol>
+<li>将传入的初始化 <strong>lambda</strong> 块存储在属性的 <strong>initializer</strong> 中。</li>
+</ol>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/7UUAY6.png" alt="初始化 lambda 不会执行，但会存储起来以供以后执行。"></p>
+<ol start="2">
+<li>通过属性 <strong>_value</strong> 来存储值。此属性最开始<strong>初始值</strong>为<strong>UNINITIALIZED_VALUE</strong>。</li>
+</ol>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/n5eoQ5.png" alt="分配 UNINITIALIZED\_VALUE 表示该值未初始化。"></p>
+<ol start="3">
+<li>在执行<strong>读取</strong>操作（属性 <strong>get</strong> 访问器）时，如果 <strong>_value</strong> 的值是最开始初始值 <strong>UNINITIALIZED_VALUE</strong>，那么就会去执行 <strong>initializer</strong> 初始化器。</li>
+</ol>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/4xFLYF.png" alt="延迟初始化是通过在首次访问时执行初始化程序来执行的。"></p>
+<ol start="4">
+<li>在执行<strong>读取</strong>操作（属性 <strong>get</strong> 访问器）时，如果 <strong>_value</strong> 的值<strong>不是</strong>等于** UNINITIALIZED_VALUE**, 那就说明初始化操作已经执行完成了。</li>
+</ol>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/ToKFdM.png" alt="现在存储的值已经存在，对 getValue() 的调用将返回“John”。"></p>
+<h3 id="SynchronizedLazyImpl"><a href="#SynchronizedLazyImpl" class="headerlink" title="SynchronizedLazyImpl"></a>SynchronizedLazyImpl</h3><p>如果你<strong>没有明确</strong>指定具体模式，延迟具体实现就是 <strong>SynchronizedLazyImpl</strong>，它默认<strong>只执行一次初始化</strong>。我们来看看它的实现代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> object UNINITIALIZED_VALUE</span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedLazyImpl</span>&lt;<span class="title">out</span> <span class="title">T</span>&gt;(</span></span><br><span class="line">        initializer: () -&gt; T,</span><br><span class="line">        lock: Any? = <span class="keyword">null</span></span><br><span class="line">) : Lazy&lt;T&gt;,</span><br><span class="line">    Serializable &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> initializer: (() -&gt; T)? = initializer</span><br><span class="line">    <span class="meta">@Volatile</span> <span class="keyword">private</span> <span class="keyword">var</span> _value: Any? = UNINITIALIZED_VALUE</span><br><span class="line">    <span class="comment">// final field is required</span></span><br><span class="line">    <span class="comment">// to enable safe publication of constructed instance</span></span><br><span class="line">    <span class="keyword">private</span> val lock = lock ?: <span class="keyword">this</span></span><br><span class="line">    override val value: T</span><br><span class="line">        get() &#123;</span><br><span class="line">            val _v1 = _value</span><br><span class="line">            <span class="keyword">if</span> (_v1 !== UNINITIALIZED_VALUE) &#123;</span><br><span class="line">                <span class="meta">@Suppress</span>(<span class="string">"UNCHECKED_CAST"</span>)</span><br><span class="line">                <span class="keyword">return</span> _v1 as T</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">synchronized</span>(lock) &#123;</span><br><span class="line">                val _v2 = _value</span><br><span class="line">                <span class="keyword">if</span> (_v2 !== UNINITIALIZED_VALUE) &#123;</span><br><span class="line">                    <span class="meta">@Suppress</span>(<span class="string">"UNCHECKED_CAST"</span>) (_v2 as T)</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    val typedValue = initializer!!()</span><br><span class="line">                    _value = typedValue</span><br><span class="line">                    initializer = <span class="keyword">null</span></span><br><span class="line">                    typedValue</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="function">override fun <span class="title">isInitialized</span><span class="params">()</span>: Boolean </span>=</span><br><span class="line">            _value !== UNINITIALIZED_VALUE</span><br><span class="line">    <span class="function">override fun <span class="title">toString</span><span class="params">()</span>: String </span>=[]</span><br><span class="line">            <span class="keyword">if</span> (isInitialized()) value.toString()</span><br><span class="line">            <span class="keyword">else</span> <span class="string">"Lazy value not initialized yet."</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> fun <span class="title">writeReplace</span><span class="params">()</span>: Any </span>=</span><br><span class="line">            InitializedLazyImpl(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这看起来有点复杂。但它只是<strong>多线程</strong>的<strong>一般实现</strong>。</p>
+<ul>
+<li>使用 <strong>synchronized()</strong> 同步块执行<strong>初始化</strong>块</li>
+<li>由于初始化可能已经由另一个线程完成，它会进行<strong>双重锁检测（DCL）</strong>,如果<strong>已经</strong>完成了<strong>初始化</strong>，则返回<strong>存储的值</strong>。</li>
+<li>如果它<strong>未初始化</strong>，它将执行 <strong>lambda</strong> 表达式并<strong>存储</strong>返回值。那么随后这个 <strong>initializer</strong> 将会置为 <strong>null</strong>，因为初始化完成后就不再需要它了。</li>
+</ul>
+<h2 id="Kotlin-的委托属性将会让你快乐-😀"><a href="#Kotlin-的委托属性将会让你快乐-😀" class="headerlink" title="Kotlin 的委托属性将会让你快乐 😀"></a>Kotlin 的委托属性将会让你快乐 😀</h2><p>当然，延迟初始化有时会导致问题发生或通过绕过控制流并在异常情况下生成正常值来使调试变得困难。</p>
+<p>但是，如果你对这些情况非常谨慎，那么Kotlin的延迟初始化可以使我们更加自由地避免对线程安全性和性能的担忧。</p>
+<p>我们还研究了延迟初始化是运算符 <strong>by</strong> 和 <strong>lazy</strong> 函数的共同作用的结果。还有<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.properties/-delegates/" target="_blank" rel="noopener" title="Delegates">更多委托</a>，如 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.properties/-delegates/observable.html" target="_blank" rel="noopener" title="observable">observable</a> 和 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.properties/-delegates/not-null.html" target="_blank" rel="noopener" title="notNull">notNull</a> 。如有必要，你还可以实现有趣的委托属性！</p>
+
+                    </article>
+                    
+    <blockquote class="post-license">
+        <p>
+            <strong>
+                 
+                    本文作者&nbsp;:&nbsp;[原] Chang W. Doh，[译] 极客熊猫
+                 
+            </strong>
+            <br>
+            <strong>
+            
+                ©️ 转载文章，版权归原作者所有
+            </strong>
+            <br>
+            <strong>本文链接&nbsp;:&nbsp;</strong><a href="https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/">https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/</a>
+        </p>
+    </blockquote>
+
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-08-19");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-19T04:59:42.445Z" itemprop="datePublished">2020-08-19</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/Kotlin%E7%AC%94%E8%AE%B0/'>Kotlin笔记</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Kotlin/" rel="tag">#&nbsp;Kotlin</a>
+
+<a class="post-tags-list-item" href="/tags/Delegation/" rel="tag">#&nbsp;Delegation</a>
+
+<a class="post-tags-list-item" href="/tags/Lazy/" rel="tag">#&nbsp;Lazy</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/kotlin-standard-funcation/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">掌握 Kotlin 中的标准库函数 run、with、let、also 和 apply</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "WfyboDNB3X0Wrr5Tm2Jvd2Ii-MdYXbMMI",
+        appKey: "6FBsLgRXWbuDJ2AdCOMN7P1q",
+        placeholder: "请在发表评论时留下您的电子邮件地址，以便您收到消息提醒...",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'mp',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: false
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://plain-dev.com">Plain's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a href="https://www.cloudflare.com" target="_blank" rel="nofollow noopener noreferrer noopener">Cloudflare</a><br />Join TG channel <a href="https://t.me/DigitalLife_CH" target="_blank" rel="nofollow noopener noreferrer noopener">👨🏻‍💻数字生活 | Digital life 🎉 </a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2018;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

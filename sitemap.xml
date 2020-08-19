@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/</loc>
+    
+    <lastmod>2020-08-19T05:02:53.403Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://plain-dev.com/android-hilt-first-experience/</loc>
     
     <lastmod>2020-08-18T11:08:11.369Z</lastmod>
