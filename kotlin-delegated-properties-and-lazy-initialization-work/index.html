@@ -150,7 +150,7 @@
     <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Plain's Blog"><meta name="msapplication-starturl" content="https://plain-dev.com"><meta name="msapplication-navbutton-color" content="#F8FAFF"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plain's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="Kotlin 中委托属性和延迟初始化的工作方式 | Plain&#39;s Blog"><meta property="og:site_name" content="Plain&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/"><meta property="og:locale" content="zh-CN"><meta name="description" content="在支持面向对象范式的编程语言中，相信大家对访问属性应该非常熟悉了吧。Kotlin 就提供了很多这样的方法，通过 by lazy 实现属性的懒加载就是一个很好的例子。 在这篇文章中，我们将一起去看看如何使用 Kotlin 中的委托属性以及 by lazy 的懒加载然后深入了解它们内部的工作原理，一步步揭开它们语法糖衣。 可空类型我认为你们中很多人对 nullable 已经了然于胸，但是让我们再来看看 - Plain - Plain&#39;s Blog"><meta name="keywords" content="Kotlin, Delegation, Lazy, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/VLy2C7.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/UK7wrY.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/7UUAY6.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/n5eoQ5.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/4xFLYF.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/ToKFdM.png"><meta property="article:published_time" content="2020-08-19T04:59:42.445Z"><meta property="article:modified_time" content="2020-08-19T05:02:53.403Z"><meta property="og:updated_time" content="2020-08-19T05:02:53.403Z"><meta property="article:author" content="Plain"><meta property="article:tag" content="Kotlin, Delegation, Lazy, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta name="twitter:card" content="summary">
+    <meta property="og:title" content="Kotlin 中委托属性和延迟初始化的工作方式 | Plain&#39;s Blog"><meta property="og:site_name" content="Plain&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://plain-dev.com/kotlin-delegated-properties-and-lazy-initialization-work/"><meta property="og:locale" content="zh-CN"><meta name="description" content="在支持面向对象范式的编程语言中，相信大家对访问属性应该非常熟悉了吧。Kotlin 就提供了很多这样的方法，通过 by lazy 实现属性的懒加载就是一个很好的例子。 在这篇文章中，我们将一起去看看如何使用 Kotlin 中的委托属性以及 by lazy 的懒加载然后深入了解它们内部的工作原理，一步步揭开它们语法糖衣。 可空类型我认为你们中很多人对 nullable 已经了然于胸，但是让我们再来看看 - Plain - Plain&#39;s Blog"><meta name="keywords" content="Kotlin, Delegation, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/VLy2C7.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/UK7wrY.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/7UUAY6.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/n5eoQ5.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/4xFLYF.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/ToKFdM.png"><meta property="article:published_time" content="2020-08-19T04:59:42.445Z"><meta property="article:modified_time" content="2020-08-19T07:44:18.338Z"><meta property="og:updated_time" content="2020-08-19T07:44:18.338Z"><meta property="article:author" content="Plain"><meta property="article:tag" content="Kotlin, Delegation, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta name="twitter:card" content="summary">
 
     
 
@@ -209,7 +209,7 @@
     },
     
     "datePublished": "2020-08-19T04:59:42.445Z",
-    "dateModified": "2020-08-19T05:02:53.403Z",
+    "dateModified": "2020-08-19T07:44:18.338Z",
     "author": {
         "@type": "Person",
         "name": "Plain",
@@ -234,7 +234,7 @@
         "query-input": "required name=search_term_string"
     },
     
-    "keywords": "Kotlin, Delegation, Lazy, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客",
+    "keywords": "Kotlin, Delegation, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客",
     "description": "在支持面向对象范式的编程语言中，相信大家对访问属性应该非常熟悉了吧。Kotlin 就提供了很多这样的方法，通过 by lazy 实现属性的懒加载就是一个很好的例子。 在这篇文章中，我们将一起去看看如何使用 Kotlin 中的委托属性以及 by lazy 的懒加载然后深入了解它们内部的工作原理，一步步揭开它们语法糖衣。 可空类型我认为你们中很多人对 nullable 已经了然于胸，但是让我们再来看看 - Plain - Plain&#39;s Blog"
 }
 </script>
@@ -602,8 +602,6 @@
 
 <a class="post-tags-list-item" href="/tags/Delegation/" rel="tag">#&nbsp;Delegation</a>
 
-<a class="post-tags-list-item" href="/tags/Lazy/" rel="tag">#&nbsp;Lazy</a>
-
 </span>
 
 
@@ -613,6 +611,13 @@
                 <div class="post-nav px-2 bg-gray">
 <ul class="pagination">
     <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/kotlin-Implement-delegation-by-yourself/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Kotlin 自己实现委托（Delegation）</div>
+            </a>
+        </li>
     
 
     <!-- Next Nav -->
