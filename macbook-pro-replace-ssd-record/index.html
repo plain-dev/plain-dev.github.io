@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="//cdn1.lncld.net">
+
+
+<!-- analytics -->
+
+    <link rel="dns-prefetch" href="//hm.baidu.com">
+
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>MacBook Pro (Retina, 13-inch, Early 2015) 更换 NVMe SSD 西部数据 SN750 记录 | Plain&#39;s Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="192x192" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="32x32" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="16x16" href="/img/icon.png"><link rel="mask-icon" href="/img/icon.png" color="#F8FAFF"><meta name="theme-color" content="#F8FAFF">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #F8FAFF;
+    }
+
+    a, a:visited {
+        color: #6A4C9C;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #6A4C9C;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #6A4C9C;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #6A4C9C;
+    }
+
+    .avatar {
+        background: #6A4C9C;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #6A4C9C;
+    }
+
+    .navbar-link:hover {
+        color: #6A4C9C;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #6A4C9C;
+        border-color: #6A4C9C;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #6A4C9C;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #F8FAFF;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Plain's Blog"><meta name="msapplication-starturl" content="https://plain-dev.com"><meta name="msapplication-navbutton-color" content="#F8FAFF"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plain's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="MacBook Pro (Retina, 13-inch, Early 2015) 更换 NVMe SSD 西部数据 SN750 记录 | Plain&#39;s Blog"><meta property="og:site_name" content="Plain&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://plain-dev.com/macbook-pro-replace-ssd-record/"><meta property="og:locale" content="zh-CN"><meta name="description" content="这台 Mac 用了4年了，当初图便宜买了 128G 版本，到现在已经完全不够用了，好在这一代 Mac 可以换硬盘，于是就有了这篇文章 📝  准备物料 西部数据 SN750 500G NVMe SSD *  Mac SSD 转 NVMe SSD 转换卡 *  U盘启动盘 * 时间机器备份硬盘 * T5 螺丝刀（硬盘🔩）加1.2* 螺丝刀（后盖🔩） *  防静电手环  拆机吸盘  Laird 散 - Plain - Plain&#39;s Blog"><meta name="keywords" content="macOS, Macbook Pro, SN750, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/k71cMH.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/MBGzZb.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/3Uwmk8.jpeg"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/YGMede.jpeg"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/mLr5r8.jpg"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/Tzl87s.jpeg"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/sqDFt3.jpeg"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/RQH60p.png"><meta property="og:image" content="https://gitee.com/plain-dev/oss/raw/master/v2/hMbbJL.png"><meta property="article:published_time" content="2020-08-20T01:24:26.143Z"><meta property="article:modified_time" content="2020-08-20T01:37:55.459Z"><meta property="og:updated_time" content="2020-08-20T01:37:55.459Z"><meta property="article:author" content="Plain"><meta property="article:tag" content="macOS, Macbook Pro, SN750, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://plain-dev.com/macbook-pro-replace-ssd-record/">
+
+    <meta name="generator" content="Hexo 4.2.0">
+
+    <!-- ### Analytics ### -->
+    
+    <!-- Google Analytics -->
+<script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-152396978-1', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?a576f1cb9fdd2eb09be64aecb926dda9';
+    var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://plain-dev.com/macbook-pro-replace-ssd-record/",
+    "@type": "BlogPosting",
+    "logo": "https://plain-dev.com/img/icon.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://plain-dev.com/macbook-pro-replace-ssd-record/"
+    },
+    "headline": "MacBook Pro (Retina, 13-inch, Early 2015) 更换 NVMe SSD 西部数据 SN750 记录 | Plain&#39;s Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://plain-dev.com/img/icon.png"
+    },
+    
+    "datePublished": "2020-08-20T01:24:26.143Z",
+    "dateModified": "2020-08-20T01:37:55.459Z",
+    "author": {
+        "@type": "Person",
+        "name": "Plain",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://gitee.com/plain-dev/oss/raw/master/v2/J4rsMp.jpg"
+        },
+        "description": "休想打败我的生活🔥"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Plain&#39;s Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://plain-dev.com/img/icon.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://plain-dev.com/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "macOS, Macbook Pro, SN750, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客",
+    "description": "这台 Mac 用了4年了，当初图便宜买了 128G 版本，到现在已经完全不够用了，好在这一代 Mac 可以换硬盘，于是就有了这篇文章 📝  准备物料 西部数据 SN750 500G NVMe SSD *  Mac SSD 转 NVMe SSD 转换卡 *  U盘启动盘 * 时间机器备份硬盘 * T5 螺丝刀（硬盘🔩）加1.2* 螺丝刀（后盖🔩） *  防静电手环  拆机吸盘  Laird 散 - Plain - Plain&#39;s Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+</head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Plain&#39;s Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                休想打败我的生活🔥
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/tags/" class="navbar-link">标签</a>
+    
+        <a href="/about/" class="navbar-link">关于</a>
+    
+        <a href="/links/" class="navbar-link">友链</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=Plain's Blog&url=https://plain-dev.com&pic=https://plain-dev.com/img/icon.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Plain's Blog&url=https://plain-dev.com&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain's Blog&title=MacBook Pro (Retina, 13-inch, Early 2015) 更换 NVMe SSD 西部数据 SN750 记录&summary=极简主义&pics=https://plain-dev.com/img/icon.png&url=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://plain-dev.com&text=MacBook Pro (Retina, 13-inch, Early 2015) 更换 NVMe SSD 西部数据 SN750 记录" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">MacBook Pro (Retina, 13-inch, Early 2015) 更换 NVMe SSD 西部数据 SN750 记录</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="https://gitee.com/plain-dev/oss/raw/master/v2/J4rsMp.jpg" src="/img/suka-lazyload.gif" alt="Plain's Avatar">
+        <span>2020-08-20</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/%E5%AE%9E%E7%94%A8%E6%95%99%E7%A8%8B/">实用教程</a>
+        
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=MacBook Pro (Retina, 13-inch, Early 2015) 更换 NVMe SSD 西部数据 SN750 记录&url=https://plain-dev.com/macbook-pro-replace-ssd-record/&pic=https://plain-dev.com/img/icon.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=MacBook Pro (Retina, 13-inch, Early 2015) 更换 NVMe SSD 西部数据 SN750 记录&url=https://plain-dev.com/macbook-pro-replace-ssd-record/&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://plain-dev.com/macbook-pro-replace-ssd-record/" target="_blank" rel="external noopener noreferrer nofollow">分享到 Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain's Blog&title=Plain's Blog&summary=极简主义&pics=https://plain-dev.com/img/icon.png&url=https://plain-dev.com/macbook-pro-replace-ssd-record/" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://plain-dev.com/macbook-pro-replace-ssd-record/&text=Plain's Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备物料"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备物料</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#制作启动盘-🎯"><span class="post-toc-number">2.</span> <span class="post-toc-text">制作启动盘 🎯</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#备份系统-💾"><span class="post-toc-number">3.</span> <span class="post-toc-text">备份系统 💾</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更换硬盘-🔧"><span class="post-toc-number">4.</span> <span class="post-toc-text">更换硬盘 🔧</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#全家福👪"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">全家福👪</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-拧开底部螺丝，打开后盖"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">1. 拧开底部螺丝，打开后盖</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-断开电池排线，安装新硬盘"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">2. 断开电池排线，安装新硬盘</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-安装系统"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">3. 安装系统</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-技术总结"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">4. 技术总结</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更换前后对比-🆚"><span class="post-toc-number">5.</span> <span class="post-toc-text">更换前后对比 🆚</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#速度-🏎"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">速度 🏎</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#休眠耗电-🔋"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">休眠耗电 🔋</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#温度-🌡️"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">温度 🌡️</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">6.</span> <span class="post-toc-text">总结</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <blockquote>
+<p>这台 <strong>Mac</strong> 用了4年了，当初图便宜买了 <strong>128G</strong> 版本，到现在已经完全不够用了，好在这一代 <strong>Mac</strong> 可以换硬盘，于是就有了这篇文章 📝</p>
+</blockquote>
+<h2 id="准备物料"><a href="#准备物料" class="headerlink" title="准备物料"></a>准备物料</h2><ul>
+<li>西部数据 SN750 500G NVMe SSD * </li>
+<li>Mac SSD 转 NVMe SSD 转换卡 * </li>
+<li>U盘启动盘 *</li>
+<li>时间机器备份硬盘 *</li>
+<li>T5 螺丝刀（硬盘🔩）加1.2* 螺丝刀（后盖🔩） * </li>
+<li>防静电手环 </li>
+<li>拆机吸盘 </li>
+<li>Laird 散热硅胶垫 2mm </li>
+</ul>
+<p>标注 <strong>*</strong> 为必须 </p>
+<h2 id="制作启动盘-🎯"><a href="#制作启动盘-🎯" class="headerlink" title="制作启动盘 🎯"></a>制作启动盘 🎯</h2><p>参见官方教程 <a href="https://support.apple.com/zh-cn/HT201372" target="_blank" rel="noopener">https://support.apple.com/zh-cn/HT201372</a></p>
+<ol>
+<li><p>下载安装镜像</p>
+</li>
+<li><p>格式化U盘</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/k71cMH.png" alt=""></p>
+<ol start="3">
+<li>写入镜像到U盘</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /Applications/Catalina.app/Contents/Resources/createinstallmedia --volume /Volumes/Guide</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>等待写入完成 ⌛️</li>
+</ol>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/MBGzZb.png" alt=""></p>
+<h2 id="备份系统-💾"><a href="#备份系统-💾" class="headerlink" title="备份系统 💾"></a>备份系统 💾</h2><p>使用<strong>时间机器</strong>备份系统</p>
+<h2 id="更换硬盘-🔧"><a href="#更换硬盘-🔧" class="headerlink" title="更换硬盘 🔧"></a>更换硬盘 🔧</h2><h3 id="全家福👪"><a href="#全家福👪" class="headerlink" title="全家福👪"></a>全家福👪</h3><p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/3Uwmk8.jpeg" alt="全家福"></p>
+<h3 id="1-拧开底部螺丝，打开后盖"><a href="#1-拧开底部螺丝，打开后盖" class="headerlink" title="1. 拧开底部螺丝，打开后盖"></a>1. 拧开底部螺丝，打开后盖</h3><p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/YGMede.jpeg" alt="拧开底部螺丝，打开后盖"></p>
+<p><em>⚠️注意螺丝位置</em></p>
+<h3 id="2-断开电池排线，安装新硬盘"><a href="#2-断开电池排线，安装新硬盘" class="headerlink" title="2. 断开电池排线，安装新硬盘"></a>2. 断开电池排线，安装新硬盘</h3><p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/mLr5r8.jpg" alt="断开电池排线，安装新硬盘"></p>
+<p><em>⚠️先安装<strong>转换卡</strong>，在安装<strong>硬盘</strong>，注意有没有<strong>完全</strong>插入</em></p>
+<h3 id="3-安装系统"><a href="#3-安装系统" class="headerlink" title="3. 安装系统"></a>3. 安装系统</h3><p>检查没有问题，盖上后盖，先<strong>不要</strong>拧螺丝</p>
+<p>插入之前做好的<strong>启动盘</strong>，开机按住 <strong>⌥(option)</strong> 键选择从<strong>启动盘</strong>启动</p>
+<p>首先进入<strong>磁盘工具</strong>格式化新硬盘</p>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/Tzl87s.jpeg" alt="格式化新硬盘"></p>
+<ul>
+<li><strong>格式</strong>：<strong>APFS</strong></li>
+<li><strong>方案</strong>：<strong>GUID分区图</strong></li>
+</ul>
+<p>格式化<strong>完成</strong>后，<strong>关闭</strong>磁盘工具</p>
+<p>选择安装系统，进入系统安装流程，等待系统安装完成 ⌛️</p>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/sqDFt3.jpeg" alt="安装系统"></p>
+<p>安装好系统后，按照引导流程操作。</p>
+<p>如果需要从时间机器<strong>恢复</strong>系统，可以在引导界面中，选择从时间机器恢复系统。</p>
+<p>至此，<strong>安装完毕</strong> 🎉</p>
+<h3 id="4-技术总结"><a href="#4-技术总结" class="headerlink" title="4. 技术总结"></a>4. 技术总结</h3><ul>
+<li><p>更换硬盘前记得<strong>断开电池排线</strong> 🔋</p>
+</li>
+<li><p>使用U盘做启动盘，抹掉<strong>新磁盘</strong>后，最好<strong>重新安装</strong>新系统，再从<strong>时间机器恢复资料</strong></p>
+</li>
+<li><p>固定硬盘时螺丝<strong>不要拧太紧</strong>，防止<strong>硬盘变形</strong></p>
+</li>
+<li><p>推荐磁盘命名 Macintosh HD</p>
+</li>
+</ul>
+<h2 id="更换前后对比-🆚"><a href="#更换前后对比-🆚" class="headerlink" title="更换前后对比 🆚"></a>更换前后对比 🆚</h2><h3 id="速度-🏎"><a href="#速度-🏎" class="headerlink" title="速度 🏎"></a>速度 🏎</h3><p>原装硬盘</p>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/RQH60p.png" alt="原装硬盘"></p>
+<p>SN750</p>
+<p><img src="https://gitee.com/plain-dev/oss/raw/master/v2/hMbbJL.png" alt="SN750"></p>
+<p>可以看到速度提升还是很显著的 🎉</p>
+<h3 id="休眠耗电-🔋"><a href="#休眠耗电-🔋" class="headerlink" title="休眠耗电 🔋"></a>休眠耗电 🔋</h3><p>电池均为<strong>百分百</strong>的情况下盒盖休眠</p>
+<ul>
+<li><p><strong>原装硬盘</strong>：100% -&gt; 83%（耗电17%）</p>
+</li>
+<li><p><strong>SN750</strong>：100% -&gt; 83%（耗电17%）</p>
+</li>
+</ul>
+<p>可以看到更换前后，并<strong>没有区别</strong></p>
+<p><em>⚠️ 后台开着*</em>微信<strong>、和一些</strong>状态栏工具***</p>
+<p>改善休眠耗电情况</p>
+<p>参考文章 <a href="https://www.cnblogs.com/toulanboy/p/9839272.html" target="_blank" rel="noopener">https://www.cnblogs.com/toulanboy/p/9839272.html</a></p>
+<h3 id="温度-🌡️"><a href="#温度-🌡️" class="headerlink" title="温度 🌡️"></a>温度 🌡️</h3><p><strong>原装硬盘</strong></p>
+<ul>
+<li><strong>CPU</strong>：日常 <strong>60 - 70</strong> 度，高负债 <strong>90 - 100</strong> 度</li>
+<li><strong>硬盘</strong>：日常 <strong>43 - 47</strong> 度，高负债 <strong>50 - 55</strong> 度</li>
+</ul>
+<p><strong>SN750</strong></p>
+<ul>
+<li><strong>CPU</strong>：日常 <strong>60 - 70</strong> 度，高负债 <strong>90 - 100</strong> 度</li>
+<li><strong>硬盘</strong>：日常 <strong>35 - 40</strong> 度，高负债 <strong>35 - 45</strong> 度</li>
+</ul>
+<p>可以看到更换前后 <strong>CPU</strong> 温度<strong>变化不大</strong>，<strong>硬盘</strong>温度有所<strong>下降</strong>，应该是贴了<strong>散热硅胶垫</strong>的缘故</p>
+<p><em>⚠️ 高负债：<strong>Android Studio</strong> 编译项目，<strong>Chrome</strong> 开<strong>5</strong>个网页并在线播放<strong>4K</strong>视频</em></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次给这台2015款 <strong>MBP</strong> 换硬盘，可以说是非常成功的，电脑又可以多用几年了 🎉</p>
+<p><a href="https://github.com/plain-dev/MacBookPro-13-inch-Early-2015-Replace-Western-Digital-SN750-NVMe-SSD" target="_blank" rel="noopener">查看原文</a></p>
+
+                    </article>
+                    
+    <blockquote class="post-license">
+        <p>
+            <strong>
+                 
+                    本文作者&nbsp;:&nbsp;Plain
+                 
+            </strong>
+            <br>
+            <strong>
+            
+                This blog is under a <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 3.0 Unported License</a>
+            </strong>
+            <br>
+            <strong>本文链接&nbsp;:&nbsp;</strong><a href="https://plain-dev.com/macbook-pro-replace-ssd-record/">https://plain-dev.com/macbook-pro-replace-ssd-record/</a>
+        </p>
+    </blockquote>
+
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-08-20");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2020-08-20T01:24:26.143Z" itemprop="datePublished">2020-08-20</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/%E5%AE%9E%E7%94%A8%E6%95%99%E7%A8%8B/'>实用教程</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/macOS/" rel="tag">#&nbsp;macOS</a>
+
+<a class="post-tags-list-item" href="/tags/Macbook-Pro/" rel="tag">#&nbsp;Macbook Pro</a>
+
+<a class="post-tags-list-item" href="/tags/SN750/" rel="tag">#&nbsp;SN750</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/kotlin-Implement-delegation-by-yourself/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Kotlin 自己实现委托（Delegation）</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="vcomments"></div>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = '' === 'true';
+    var verify = '' === 'true';
+    new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        appId: "WfyboDNB3X0Wrr5Tm2Jvd2Ii-MdYXbMMI",
+        appKey: "6FBsLgRXWbuDJ2AdCOMN7P1q",
+        placeholder: "请在发表评论时留下您的电子邮件地址，以便您收到消息提醒...",
+        meta: guest_info,
+        pageSize:'10',
+        avatar:'mp',
+        lang:'zh-cn',
+        guest_info: guest_info,
+        visitor: false
+    });
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://plain-dev.com">Plain's Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    Hosted on <a href="https://www.cloudflare.com" target="_blank" rel="nofollow noopener noreferrer noopener">Cloudflare</a><br />Join TG channel <a href="https://t.me/DigitalLife_CH" target="_blank" rel="nofollow noopener noreferrer noopener">👨🏻‍💻数字生活 | Digital life 🎉 </a>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2018;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>
