@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://plain-dev.com/kms-windows/</loc>
+    
+    <lastmod>2020-09-21T05:46:00.492Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://plain-dev.com/kotlin-callback-to-coroutine/</loc>
     
-    <lastmod>2020-09-17T02:14:59.400Z</lastmod>
+    <lastmod>2020-09-17T02:14:59.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://plain-dev.com/macbook-pro-replace-ssd-record/</loc>
     
-    <lastmod>2020-08-20T05:03:36.092Z</lastmod>
+    <lastmod>2020-08-20T05:03:36.000Z</lastmod>
     
   </url>
   
@@ -348,13 +355,6 @@
     <loc>https://plain-dev.com/leetcode-Best-Time-to-Buy-and-Sell-Stock-II/</loc>
     
     <lastmod>2019-12-15T14:08:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://plain-dev.com/kms-windows/</loc>
-    
-    <lastmod>2019-12-15T14:07:03.000Z</lastmod>
     
   </url>
   

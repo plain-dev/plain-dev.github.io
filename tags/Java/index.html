@@ -641,25 +641,21 @@
         <div class="columns col-gapless">
             
                 <div class="column column-thumbnail col-4 col-lg-12">
-                    <a href="/java-extends/">
+                    <a href="/java-member-methods-of-the-class/">
                         <div class="post-thumbnail lazyload" data-bg="url(https://gitee.com/plain-dev/oss/raw/master/upic_library/F0lZ7E.jpg)"></div>
                     </a>
                 </div>
                 <div class="column column-body col-8 col-lg-12">
                     
-    <h2 class="h5 mb-0 card-header"><a class="card-title" href="/java-extends/" rel="bookmark">Java继承（extends）</a></h2>
+    <h2 class="h5 mb-0 card-header"><a class="card-title" href="/java-member-methods-of-the-class/" rel="bookmark">Java类的成员方法</a></h2>
 
 
 <p class="mb-0 card-body">
     
-        继承
-父类也称作超类、基类等
-Java只有单继承，没有像C++那样的多继承。多继承会引起混乱，不利于后期维护
-Java中接口有多继承
-子类继承父类，可以得到分类的全部属性和方法（除了父类的构造方法），但不见得可以直接访问（比如，父类私有的属性和方法）
-一个类有默认的父类：java.lang.Object
+        
+1.1 输入一个数，打印出乘法表
 
-    <a href="/java-extends/">阅读全文</a>
+    <a href="/java-member-methods-of-the-class/">阅读全文</a>
 </p>
 
 
@@ -686,21 +682,24 @@ Java中接口有多继承
         <div class="columns col-gapless">
             
                 <div class="column column-thumbnail col-4 col-lg-12">
-                    <a href="/java-member-methods-of-the-class/">
-                        <div class="post-thumbnail lazyload" data-bg="url(https://gitee.com/plain-dev/oss/raw/master/upic_library/F0lZ7E.jpg)"></div>
+                    <a href="/java-parameter-passing/">
+                        <div class="post-thumbnail lazyload" data-bg="url(https://gitee.com/plain-dev/oss/raw/master/upic_library/Tx3NvO.jpg)"></div>
                     </a>
                 </div>
                 <div class="column column-body col-8 col-lg-12">
                     
-    <h2 class="h5 mb-0 card-header"><a class="card-title" href="/java-member-methods-of-the-class/" rel="bookmark">Java类的成员方法</a></h2>
+    <h2 class="h5 mb-0 card-header"><a class="card-title" href="/java-parameter-passing/" rel="bookmark">Java参数传递机制</a></h2>
 
 
 <p class="mb-0 card-body">
     
-        
-1.1 输入一个数，打印出乘法表
+        参数传递机制方法的参数传递目前分为两种方式
 
-    <a href="/java-member-methods-of-the-class/">阅读全文</a>
+值传递（call by value）：表示方法接收的是调用者提供的地址
+引用传递（call by reference）：表示方法接收的是调用者传递的引用（内存地址）
+
+####Java是按什么传递呢？当一个对象被当作参数传递到一个方法后，在此方法内可以改变这个对象的属性，那么这里到底是「按值传递」还是「按引用传递」?答：是按值传递。Java 语言的参数传递只有「按值传递」。当一个实例对象作为参数被传递到方法中时，参数的值就是该对象的引用的一个副本。指向同一个对象，对象的内容可以在被调用的方法内改变，但对象的引用(不是引用的副本) 是永远不会改变的。
+    <a href="/java-parameter-passing/">阅读全文</a>
 </p>
 
 
