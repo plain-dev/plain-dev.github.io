@@ -50,7 +50,7 @@
     <meta name="renderer" content="webkit">
 
     <!-- Title -->
-    <title>滑动 Scrollview 时动态改变 Toolbar 透明度，模仿淘宝详情页效果 | Plain&#39;s Blog</title>
+    <title>滑动 Scrollview 时动态改变 Toolbar 透明度，模仿京东详情页效果 | Plain&#39;s Blog</title>
 
     <!-- Favicons -->
     <link rel="icon" type="image&#x2F;ico" href="/img/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="192x192" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="32x32" href="/img/icon.png"><link rel="icon" typt="image&#x2F;png" sizes="16x16" href="/img/icon.png"><link rel="mask-icon" href="/img/icon.png" color="#F8FAFF"><meta name="theme-color" content="#F8FAFF">
@@ -150,7 +150,7 @@
     <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Plain's Blog"><meta name="msapplication-starturl" content="https://plain-dev.com"><meta name="msapplication-navbutton-color" content="#F8FAFF"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plain's Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="滑动 Scrollview 时动态改变 Toolbar 透明度，模仿淘宝详情页效果 | Plain&#39;s Blog"><meta property="og:site_name" content="Plain&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://plain-dev.com/android-toolbar-becomes-transparent-with-scrollview/"><meta property="og:locale" content="zh-CN"><meta name="description" content="前段时间逛JD时看到详情页滑动时 Toolbar 改变透明度的效果感觉很不错，想着自己实现一下，于是就有了这篇文章。  效果由于GIF图过大，效果通过Demo地址查看 思路由于滑动的是一个 Scrollview，自然而然想到通过监听其滑动，通过计算Y轴滑动的距离与触发透明效果区域的距离，得到其滑动的比例，进而求得此时的透明度 实现首先定义一个接口，用来回调透明度的变化 12345678interf - Plain - Plain&#39;s Blog"><meta name="keywords" content="Android, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta property="article:published_time" content="2020-09-23T01:30:04.947Z"><meta property="article:modified_time" content="2020-09-23T06:02:20.831Z"><meta property="og:updated_time" content="2020-09-23T06:02:20.831Z"><meta property="article:author" content="Plain"><meta property="article:tag" content="Android, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta name="twitter:card" content="summary">
+    <meta property="og:title" content="滑动 Scrollview 时动态改变 Toolbar 透明度，模仿京东详情页效果 | Plain&#39;s Blog"><meta property="og:site_name" content="Plain&#39;s Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://plain-dev.com/android-toolbar-becomes-transparent-with-scrollview/"><meta property="og:locale" content="zh-CN"><meta name="description" content="前段时间逛JD时看到详情页滑动时 Toolbar 改变透明度的效果感觉很不错，想着自己实现一下，于是就有了这篇文章。  效果由于GIF图过大，效果通过Demo地址查看 思路由于滑动的是一个 Scrollview，自然而然想到通过监听其滑动，通过计算Y轴滑动的距离与触发透明效果区域的距离，得到其滑动的比例，进而求得此时的透明度 实现首先定义一个接口，用来回调透明度的变化 12345678interf - Plain - Plain&#39;s Blog"><meta name="keywords" content="Android, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta property="article:published_time" content="2020-09-23T01:30:04.947Z"><meta property="article:modified_time" content="2020-09-23T06:05:25.030Z"><meta property="og:updated_time" content="2020-09-23T06:05:25.030Z"><meta property="article:author" content="Plain"><meta property="article:tag" content="Android, Plain,PlainDev,plain-dev,plain_dev,数码,科技,动漫,游戏,开发者,个人博客"><meta name="twitter:card" content="summary">
 
     
 
@@ -201,7 +201,7 @@
         "@type": "WebPage",
         "@id": "https://plain-dev.com/android-toolbar-becomes-transparent-with-scrollview/"
     },
-    "headline": "滑动 Scrollview 时动态改变 Toolbar 透明度，模仿淘宝详情页效果 | Plain&#39;s Blog",
+    "headline": "滑动 Scrollview 时动态改变 Toolbar 透明度，模仿京东详情页效果 | Plain&#39;s Blog",
     
     "image": {
         "@type": "ImageObject",
@@ -209,7 +209,7 @@
     },
     
     "datePublished": "2020-09-23T01:30:04.947Z",
-    "dateModified": "2020-09-23T06:02:20.831Z",
+    "dateModified": "2020-09-23T06:05:25.030Z",
     "author": {
         "@type": "Person",
         "name": "Plain",
@@ -313,14 +313,14 @@
         <!-- Share QQ -->
         
         <li class="menu-item">
-            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain's Blog&title=滑动 Scrollview 时动态改变 Toolbar 透明度，模仿淘宝详情页效果&summary=极简主义&pics=https://plain-dev.com/img/icon.png&url=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Plain's Blog&title=滑动 Scrollview 时动态改变 Toolbar 透明度，模仿京东详情页效果&summary=极简主义&pics=https://plain-dev.com/img/icon.png&url=https://plain-dev.com" target="_blank" rel="external noopener noreferrer nofollow"> 分享到 QQ</a>
         </li>
         
 
         <!-- Share Telegram -->
         
         <li class="menu-item">
-            <a href="https://t.me/share/url?url=https://plain-dev.com&text=滑动 Scrollview 时动态改变 Toolbar 透明度，模仿淘宝详情页效果" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+            <a href="https://t.me/share/url?url=https://plain-dev.com&text=滑动 Scrollview 时动态改变 Toolbar 透明度，模仿京东详情页效果" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
         </li>
         
 
@@ -344,7 +344,7 @@
                 <!-- # Post Header Info # -->
                 <div class="card-header">
                     
-    <h1 class="card-title h3 mb-2">滑动 Scrollview 时动态改变 Toolbar 透明度，模仿淘宝详情页效果</h1>
+    <h1 class="card-title h3 mb-2">滑动 Scrollview 时动态改变 Toolbar 透明度，模仿京东详情页效果</h1>
 
 
 
@@ -368,14 +368,14 @@
     <!-- Share Weibo -->
     
     <li class="menu-item">
-        <a href="http://service.weibo.com/share/share.php?appkey=&title=滑动 Scrollview 时动态改变 Toolbar 透明度，模仿淘宝详情页效果&url=https://plain-dev.com/android-toolbar-becomes-transparent-with-scrollview/&pic=https://plain-dev.com/img/icon.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=滑动 Scrollview 时动态改变 Toolbar 透明度，模仿京东详情页效果&url=https://plain-dev.com/android-toolbar-becomes-transparent-with-scrollview/&pic=https://plain-dev.com/img/icon.png&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">分享到微博</a>
     </li>
     
 
     <!-- Share Twitter -->
     
     <li class="menu-item">
-        <a href="https://twitter.com/intent/tweet?text=滑动 Scrollview 时动态改变 Toolbar 透明度，模仿淘宝详情页效果&url=https://plain-dev.com/android-toolbar-becomes-transparent-with-scrollview/&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        <a href="https://twitter.com/intent/tweet?text=滑动 Scrollview 时动态改变 Toolbar 透明度，模仿京东详情页效果&url=https://plain-dev.com/android-toolbar-becomes-transparent-with-scrollview/&via=Plain" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
     </li>
     
 
