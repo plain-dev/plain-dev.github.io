@@ -1,0 +1,17 @@
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: baiduspider
+Disallow: /
+
+User-agent: *
+Disallow: /archives
+
+User-agent: *
+Disallow: /categories
+
+User-agent: *
+Disallow: /tags
+
+User-agent: *
+Disallow: /readme
